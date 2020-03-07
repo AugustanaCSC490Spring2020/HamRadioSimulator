@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\genesissarmiento17\\AndroidStudioProjects\\HamRadioSimulator\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\genesissarmiento17\\.gradle\\caches\\transforms-2\\files-2.1\\3c15cd6599dae021872a1157917ebdf6\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\genesissarmiento17\\.gradle\\caches\\transforms-2\\files-2.1\\1b73d201822ba7b68fe8aa9423ca00f9\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\genesissarmiento17\\.gradle\\caches\\transforms-2\\files-2.1\\ec5eea836ad6b5e99377e46f11714a19\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\genesissarmiento17\\.gradle\\caches\\transforms-2\\files-2.1\\24c8793e0308606cba947fca91d30a43\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
