@@ -1,136 +1,136 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\836a31e98c5f680198957712cef9c58e\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\e913d79a0a04b079761868947e09e6db\AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\0752fd8cb9ce0c5270c6505a9faad8ef\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\37a59380e98e0f19ad84fc7c2d4b81e1\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b5ebc6b1c93821ec91165711c45607c9\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\18bc9db4d8f42cc22060ac36954e3a71\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\44aec4843efd33feabcb08a574eb15ff\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\fee5496fedb01583f68df161ed3cb805\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\9e3f712b1b58430edec793aad9b25758\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\c8d53ce8c09882556458cf94c230f65d\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f272d35266dabe8a8b10f77dca7e365c\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b0fa6f1af0b3740ab27d17b382c35373\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b70257c583cd987ab8b24ad2c9c725f8\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\58836744f2ed79153f3503dc0b3fc94a\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\5a1af34285980cfece02fe28a573e5f4\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f77f16725fb8504ce0133bd3db431772\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\219d85a95a954ed6e97b73afd82015dc\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\d4cb2d4a5f80d4008472d6c7cd08dc25\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\7ad9a6e40e23adac6e3c981559dfd028\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\3d556430f05cc831dc40f2f9be547c58\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ec5eea836ad6b5e99377e46f11714a19\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\62c24c86b86fbd552720f8f5e53a2b8e\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\cae2977c5ba943024b0048a67c6b131d\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\223999973c5175b19396f1b9d9e9b660\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\b339d5a60be139e95befc8cab5e1e5dd\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\280539f270d0d464e2e0782f67b200a4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ff6ad3e96b0002fe466b28ef7c0346ed\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3bd978f2fb68a4bfa41299d95d8d1214\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\13bd273a50925d08512893af9fa6634e\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\9b0f7beaebab9e69cabd0a6c298d2f9b\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\386688af563e9108783b29436c774c2d\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\78dc1aca843864797edb30036b5479ca\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\719d314308dc3c73fbb5138178d2a9f4\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\0f6f6a41360620d9bdb59203a7218717\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\83659f2a8c4ec3c758385107b8836ee9\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\7fc3bf19c7c5fd39f2a9af896d2db8ec\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\05b646ae13212ef4180c5003290faa72\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\2f42b663d51696561b120e097a2e2e72\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\23fa924928554c18f04d8af3dde280b1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\527c1802b3b1ff93af9eb03298fa9f8c\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
 	package
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:3:5-38
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:3:5-38
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:1-21:12
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:5:5-19:19
-MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\e913d79a0a04b079761868947e09e6db\AndroidManifest.xml:9:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\e913d79a0a04b079761868947e09e6db\AndroidManifest.xml:9:5-20
-MERGED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b70257c583cd987ab8b24ad2c9c725f8\AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b70257c583cd987ab8b24ad2c9c725f8\AndroidManifest.xml:24:5-25:19
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:5:5-19:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\62c24c86b86fbd552720f8f5e53a2b8e\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\62c24c86b86fbd552720f8f5e53a2b8e\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\719d314308dc3c73fbb5138178d2a9f4\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\719d314308dc3c73fbb5138178d2a9f4\AndroidManifest.xml:24:5-25:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:10:9-35
 	android:label
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:8:9-41
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:8:9-41
 	android:roundIcon
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:9:9-54
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:9:9-54
 	android:icon
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:7:9-43
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:7:9-43
 	android:allowBackup
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:6:9-35
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:11:9-40
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:11:9-40
 activity#com.example.puffinradio.MainActivity
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:12:9-18:20
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:12:9-18:20
 	android:name
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:12:19-47
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:12:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:13:13-17:29
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:13:13-17:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:14:17-69
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:14:17-69
 	android:name
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:14:25-66
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:14:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:16:17-77
+ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:16:17-77
 	android:name
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml:16:27-74
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml:16:27-74
 uses-sdk
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\836a31e98c5f680198957712cef9c58e\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\836a31e98c5f680198957712cef9c58e\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\e913d79a0a04b079761868947e09e6db\AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\e913d79a0a04b079761868947e09e6db\AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\0752fd8cb9ce0c5270c6505a9faad8ef\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\0752fd8cb9ce0c5270c6505a9faad8ef\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\37a59380e98e0f19ad84fc7c2d4b81e1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\37a59380e98e0f19ad84fc7c2d4b81e1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b5ebc6b1c93821ec91165711c45607c9\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b5ebc6b1c93821ec91165711c45607c9\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\18bc9db4d8f42cc22060ac36954e3a71\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\18bc9db4d8f42cc22060ac36954e3a71\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\44aec4843efd33feabcb08a574eb15ff\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\44aec4843efd33feabcb08a574eb15ff\AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\fee5496fedb01583f68df161ed3cb805\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\fee5496fedb01583f68df161ed3cb805\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\9e3f712b1b58430edec793aad9b25758\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\9e3f712b1b58430edec793aad9b25758\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\c8d53ce8c09882556458cf94c230f65d\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\c8d53ce8c09882556458cf94c230f65d\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f272d35266dabe8a8b10f77dca7e365c\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f272d35266dabe8a8b10f77dca7e365c\AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f2341cb2ab1af6bac0090bf14e9014d3\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b0fa6f1af0b3740ab27d17b382c35373\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b0fa6f1af0b3740ab27d17b382c35373\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b70257c583cd987ab8b24ad2c9c725f8\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\b70257c583cd987ab8b24ad2c9c725f8\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\58836744f2ed79153f3503dc0b3fc94a\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\58836744f2ed79153f3503dc0b3fc94a\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\5a1af34285980cfece02fe28a573e5f4\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\5a1af34285980cfece02fe28a573e5f4\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f77f16725fb8504ce0133bd3db431772\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\f77f16725fb8504ce0133bd3db431772\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\219d85a95a954ed6e97b73afd82015dc\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\219d85a95a954ed6e97b73afd82015dc\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\d4cb2d4a5f80d4008472d6c7cd08dc25\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\d4cb2d4a5f80d4008472d6c7cd08dc25\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\7ad9a6e40e23adac6e3c981559dfd028\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\7ad9a6e40e23adac6e3c981559dfd028\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\3d556430f05cc831dc40f2f9be547c58\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\juantenorio16\.gradle\caches\transforms-2\files-2.1\3d556430f05cc831dc40f2f9be547c58\AndroidManifest.xml:20:5-44
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ec5eea836ad6b5e99377e46f11714a19\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ec5eea836ad6b5e99377e46f11714a19\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\62c24c86b86fbd552720f8f5e53a2b8e\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\62c24c86b86fbd552720f8f5e53a2b8e\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\cae2977c5ba943024b0048a67c6b131d\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\cae2977c5ba943024b0048a67c6b131d\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\223999973c5175b19396f1b9d9e9b660\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\223999973c5175b19396f1b9d9e9b660\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\b339d5a60be139e95befc8cab5e1e5dd\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\b339d5a60be139e95befc8cab5e1e5dd\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\280539f270d0d464e2e0782f67b200a4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\280539f270d0d464e2e0782f67b200a4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ff6ad3e96b0002fe466b28ef7c0346ed\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\ff6ad3e96b0002fe466b28ef7c0346ed\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3bd978f2fb68a4bfa41299d95d8d1214\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3bd978f2fb68a4bfa41299d95d8d1214\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\13bd273a50925d08512893af9fa6634e\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\13bd273a50925d08512893af9fa6634e\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\9b0f7beaebab9e69cabd0a6c298d2f9b\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\9b0f7beaebab9e69cabd0a6c298d2f9b\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\386688af563e9108783b29436c774c2d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\386688af563e9108783b29436c774c2d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\3c15cd6599dae021872a1157917ebdf6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\78dc1aca843864797edb30036b5479ca\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\78dc1aca843864797edb30036b5479ca\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\719d314308dc3c73fbb5138178d2a9f4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\719d314308dc3c73fbb5138178d2a9f4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\0f6f6a41360620d9bdb59203a7218717\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\0f6f6a41360620d9bdb59203a7218717\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\83659f2a8c4ec3c758385107b8836ee9\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\83659f2a8c4ec3c758385107b8836ee9\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\7fc3bf19c7c5fd39f2a9af896d2db8ec\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\7fc3bf19c7c5fd39f2a9af896d2db8ec\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\05b646ae13212ef4180c5003290faa72\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\05b646ae13212ef4180c5003290faa72\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\2f42b663d51696561b120e097a2e2e72\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\2f42b663d51696561b120e097a2e2e72\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\23fa924928554c18f04d8af3dde280b1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\23fa924928554c18f04d8af3dde280b1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\527c1802b3b1ff93af9eb03298fa9f8c\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\genesissarmiento17\.gradle\caches\transforms-2\files-2.1\527c1802b3b1ff93af9eb03298fa9f8c\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\juantenorio16\AndroidStudioProjects\PuffinRadio\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\genesissarmiento17\AndroidStudioProjects\HamRadioSimulator\app\src\main\AndroidManifest.xml
