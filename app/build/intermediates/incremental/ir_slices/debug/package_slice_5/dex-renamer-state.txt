@@ -1,4 +1,0 @@
-#Sat Mar 07 17:25:53 CST 2020
-base.0=C\:\\Users\\genesissarmiento17\\AndroidStudioProjects\\HamRadioSimulator\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
-path.0=classes.dex
-renamed.0=classes.dex
