@@ -27,5 +27,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        leaderBoardButton = (Button)findViewById(R.id.leaderBoardButton);
+        leaderBoardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), LeaderboardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
