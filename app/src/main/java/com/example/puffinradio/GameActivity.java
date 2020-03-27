@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
@@ -12,8 +13,7 @@ public class GameActivity extends AppCompatActivity {
     private Button sendCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
-    private TextView guessTextView;
-
+    private EditText guessEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
