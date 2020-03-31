@@ -3,4 +3,15 @@
     <string name="about_page">An app to practice Morse code comprehension under various conditions.
         \n\nDeveloped by:\nMaegan Patterson\nGenesis Sarmiento\nDanny Tenorio\nThomas Ayele
         \n\nAdvised by:\nDr. Forrest Stonedahl </string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">General</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- General Preferences -->
+    <string name="signature_title">Your CallSign</string>
+    <string name="static_title">Static?</string>
+    <string name="CW_title">CW Speed(wpm)</string>
+    <string name="time_title">Time</string>
 </resources>
