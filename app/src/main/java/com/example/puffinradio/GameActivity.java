@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
     boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
-    int dash, dot;
+    int dash, dot; //http://onlinetonegenerator.com/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,81 +65,13 @@ public class GameActivity extends AppCompatActivity {
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helloWorld();
+                String cw = MorseCreator.createMorse("123ABC"); //test
+                Log.d("CW: ", "onClick: " + cw);
+                MorseCreator.playSound(soundPool, cw, dot, dash, 333);
+
             }
         });
 
-    }
-
-    public void rest(int length) {
-        try {
-            Thread.sleep(length);
-        } catch(InterruptedException e) {
-            Log.e("Error", "rest: Interrupted Exception");
-        }
-    }
-
-    public void dot() {
-        try {
-            soundPool.play(dot, 1, 1, 0, 0, 3);
-            Thread.sleep(666);
-        } catch(InterruptedException e) {
-            Log.e("Error", "dot: Interrupted Exception");
-        }
-    }
-
-    public void dash() {
-        try {
-            soundPool.play(dash, 1, 1, 0, 0, 1);
-            Thread.sleep(1333);
-        } catch(InterruptedException e) {
-            Log.e("Error", "dash: Interrupted Exception");
-        }
-    }
-
-    // Test: spell out "hello world" in Morse code
-    public void helloWorld() {
-        dot();
-        dot();
-        dot();
-        dot();
-        rest(666);
-        dot();
-        rest(666);
-        dot();
-        dash();
-        dot();
-        dot();
-        rest(666);
-        dot();
-        dash();
-        dot();
-        dot();
-        rest(666);
-        dash();
-        dash();
-        dash();
-        rest(2000);
-        dot();
-        dash();
-        dash();
-        rest(666);
-        dash();
-        dash();
-        dash();
-        rest(666);
-        dot();
-        dash();
-        dot();
-        rest(666);
-        dot();
-        dash();
-        dot();
-        dot();
-        rest(666);
-        dash();
-        dot();
-        dot();
     }
 
 }
