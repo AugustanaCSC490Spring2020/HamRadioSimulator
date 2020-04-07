@@ -1,7 +1,6 @@
 package com.example.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -10,18 +9,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
     private Button settingsButton;
     private Button sendCallSignButton;
-    private Button open;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
+    private List<String> fileList = new ArrayList<String>();
     int cwSpeed = 0;
     int time = 0;
     boolean hasStatic = false;
@@ -33,8 +42,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        open = (Button)findViewById(R.id.load);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -50,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
 
-        settingsButton = (Button)findViewById(R.id.settingsButton);
+        settingsButton = (Button) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +69,7 @@ public class GameActivity extends AppCompatActivity {
 
         dash = soundPool.load(this, R.raw.dash, 1);
         dot = soundPool.load(this, R.raw.dot, 1);
-        sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
+        sendCallSignButton = (Button) findViewById(R.id.sendCallSignButton);
         // Just using the button for testing purposes for now; "hello world"
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +79,25 @@ public class GameActivity extends AppCompatActivity {
                 MorseCreator.playSound(soundPool, cw, dot, dash, 333);
             }
         });
-
+        fileToList();
     }
-    public void OpenCallSign(View view) {
-        startActivity(new Intent(GameActivity.this,CallSignActivity.class));
-    }
+    private void fileToList(){
+        String fileName = getFilesDir().getPath() + "/" + "callsigns.txt";
+        File file = new File(fileName);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            DataInputStream inputStream = new DataInputStream(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String strLine;
+            while ((strLine = bufferedReader.readLine()) != null) {
+                fileList.add(strLine);
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            Toast.makeText(GameActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
+        }
+    }
 }
 
 
