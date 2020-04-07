@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
     boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
-    int dash, dot;
+    int dash, dot; //http://onlinetonegenerator.com/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +65,9 @@ public class GameActivity extends AppCompatActivity {
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
+                String cw = MorseCreator.createMorse("123ABC"); //test
+                Log.d("CW: ", "onClick: " + cw);
+                MorseCreator.playSound(soundPool, cw, dot, dash, 333);
             }
         });
 
