@@ -18,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
 
     private Button settingsButton;
     private Button sendCallSignButton;
+    private Button open;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
@@ -32,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        open = (Button)findViewById(R.id.load);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -71,6 +72,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void OpenCallSign(View view) {
+        startActivity(new Intent(GameActivity.this,CallSignActivity.class));
     }
 
 }
