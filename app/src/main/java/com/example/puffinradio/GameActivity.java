@@ -9,10 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
@@ -22,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -30,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
-    private List<String> fileList = new ArrayList<String>();
+    private List<String> callSignList = new ArrayList<String>();
     int cwSpeed = 0;
     int time = 0;
     boolean hasStatic = false;
@@ -90,13 +89,21 @@ public class GameActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String strLine;
             while ((strLine = bufferedReader.readLine()) != null) {
-                fileList.add(strLine);
+                callSignList.add(strLine);
             }
             inputStream.close();
         } catch (Exception e) {
             Toast.makeText(GameActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    private String getRandomCallsign() {
+        Random rand = new Random();
+
+        String randomCallsign = callSignList.get(rand.nextInt(callSignList.size()));
+
+        return randomCallsign;
     }
 }
 
