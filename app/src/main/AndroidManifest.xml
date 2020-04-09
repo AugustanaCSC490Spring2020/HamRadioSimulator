@@ -14,13 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-       <activity android:name=".CallSignActivity"
-                 android:label="Call Signs"
-                 android:parentActivityName=".GameActivity" >
-           <meta-data
-               android:name="android.support.PARENT_ACTIVITY"
-               android:value=".GameActivity" />
-       </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"

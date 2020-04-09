@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            //Toast.makeText(MainActivity.this, "Failed to create file: " + e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this, "Failed to download file: " + e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
         }
     }
 }
