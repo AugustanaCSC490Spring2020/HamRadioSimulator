@@ -62,13 +62,14 @@ public class GameActivity extends AppCompatActivity {
         dash = soundPool.load(this, R.raw.dash, 1);
         dot = soundPool.load(this, R.raw.dot, 1);
         sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
+        MorseCreator.initializeMorseCreator(soundPool, dot, dash);
         // Just using the button for testing purposes for now; "hello world"
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String cw = MorseCreator.createMorse("123ABC"); //test
                 Log.d("CW: ", "onClick: " + cw);
-                MorseCreator.playSound(soundPool, cw, dot, dash, 333);
+                MorseCreator.playSound(cw, 333);
             }
         });
 

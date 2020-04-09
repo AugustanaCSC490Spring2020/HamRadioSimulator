@@ -3,13 +3,20 @@ package com.example.puffinradio;
 import android.media.SoundPool;
 import android.util.Log;
 
+import android.os.Handler;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MorseCreator {
     static String[] morseCode = {"-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...",
             "---..", "----.", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
             "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-",
-            ".--", "-..-", "-.--", "--.."};
+            ".--", "-..-", "-.--", "--.."}; //0-9, A-Z
+
+    static Handler handler = new Handler();
+
+    static SoundPool soundPool;
+    static int dot, dash;
 
     public static String createMorse(String callSign) {
         Log.d(TAG, "createMorse: HERE");
@@ -20,7 +27,7 @@ public class MorseCreator {
             if(letter < 'A') {
                 morse += morseCode[Integer.parseInt("" + letter)];
             } else {
-                morse += morseCode[letter - 32];
+                morse += morseCode[letter - 55];
             }
             morse += "/"; //represents two additional units of silence to separate letters
         }
@@ -28,42 +35,52 @@ public class MorseCreator {
         return morse;
     }
 
-    public static void playSound(SoundPool soundPool, String morse, int dotSound, int dashSound, int unitLength) {
+    public static void playSound(String morse, int unitLength) {
+        int timer = 0;
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '.') {
-                dot(soundPool, dotSound, unitLength);
+                dot(timer);
+                timer += unitLength * 2;
             } else if(morse.charAt(i) == '-') {
-                dash(soundPool, dashSound, unitLength);
+                dash(timer);
+                timer += unitLength * 4;
             } else { // morse.charAt(i) == '/'
-                rest(unitLength);
+                rest(timer);
+                timer += unitLength * 2;
             }
         }
     }
 
-    //TODO: change from thread.sleep to scheduled executor
-    public static void dot(SoundPool soundPool, int dot, int length) {
-        try {
-            soundPool.play(dot, 1, 1, 0, 0, 3);
-            Thread.sleep(length * 2);
-        } catch(InterruptedException e) {
-            Log.e("Error", "dot: Interrupted Exception");
-        }
+    public static void initializeMorseCreator(SoundPool soundPoolInit, int dotInit, int dashInit) {
+        soundPool = soundPoolInit;
+        dot = dotInit;
+        dash = dashInit;
     }
 
-    public static void dash(SoundPool soundPool, int dash, int length) {
-        try {
-            soundPool.play(dash, 1, 1, 0, 0, 1);
-            Thread.sleep(length * 4);
-        } catch(InterruptedException e) {
-            Log.e("Error", "dash: Interrupted Exception");
-        }
+    public static void dot(int length) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                soundPool.play(dot, 1, 1, 0, 0, 3);
+            }
+        }, length);
+    }
+
+    public static void dash(int length) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                soundPool.play(dash, 1, 1, 0, 0, 1);
+            }
+        }, length);
     }
 
     public static void rest(int length) {
-        try {
-            Thread.sleep(length * 2);
-        } catch(InterruptedException e) {
-            Log.e("Error", "rest: Interrupted Exception");
-        }
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //
+            }
+        }, length);
     }
 }
