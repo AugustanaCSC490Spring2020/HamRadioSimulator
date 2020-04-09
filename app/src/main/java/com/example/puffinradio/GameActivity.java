@@ -75,7 +75,7 @@ public class GameActivity extends AppCompatActivity {
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cw = MorseCreator.createMorse("123ABC"); //test
+                String cw = MorseCreator.createMorse(getRandomCallsign()); //test
                 Log.d("CW: ", "onClick: " + cw);
                 MorseCreator.playSound(cw, 333);
             }
