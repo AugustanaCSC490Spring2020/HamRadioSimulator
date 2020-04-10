@@ -70,7 +70,8 @@ public class GameActivity extends AppCompatActivity {
         dot = soundPool.load(this, R.raw.dot, 1);
 
         sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
-        MorseCreator.initializeMorseCreator(soundPool, dot, dash);
+        //TODO: FIX WPM
+        MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
         // Just using the button for testing purposes for now; "hello world"
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
