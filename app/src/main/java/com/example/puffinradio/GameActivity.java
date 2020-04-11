@@ -1,12 +1,15 @@
 package com.example.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,18 +23,20 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
-
     private Button settingsButton;
     private Button sendCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
     private List<String> callSignList = new ArrayList<String>();
+    private CountDownTimer countDownTimer;
+    private long time;
     int cwSpeed = 0;
-    int time = 0;
     boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
@@ -41,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        timeTextView = findViewById(R.id.timeTextView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
@@ -82,6 +88,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         fileToList();
+        timer();
     }
     private void fileToList(){
         String fileName = getFilesDir().getPath() + "/" + "callsigns.txt";
@@ -100,13 +107,43 @@ public class GameActivity extends AppCompatActivity {
 
         }
     }
-
+    //This method is used to get the time input from the settings
+    private String getTimePreferences(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        return sharedPreferences.getString("edit_text_preference_2", "5");
+    }
     private String getRandomCallsign() {
         Random rand = new Random();
-
-        String randomCallsign = callSignList.get(rand.nextInt(callSignList.size()));
-
-        return randomCallsign;
+        return callSignList.get(rand.nextInt(callSignList.size()));
+    }
+    //This method is used to start the timer
+    private void timer(){
+       int minTime  = Integer.parseInt(getTimePreferences()); // changes string input into an int
+       time = TimeUnit.MINUTES.toMillis(minTime); // Since time input is is in min, this changes it into miliseconds
+        countDownTimer = new CountDownTimer(time, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished ) {
+               time = millisUntilFinished;
+                updateCountDownText();
+            }
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(GameActivity.this,EndActivity.class)); // when the timer is done it goes to the end activity
+                countDownTimer.cancel();
+            }
+        }.start();
+    }
+    private void updateCountDownText(){
+        int hour = (int)(time / 1000) / 3600; // changes miliseconds into hours
+        int min = (int)((time / 1000) % 3600) / 60; //changes miliseconds into mins
+        int sec = (int)(time / 1000) % 60; // changes miliseconds into sec
+        String timeLeftFormatted;
+        if (hour > 0) {
+            timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d:%02d", hour, min, sec); // if the user inputs more than 60 mins
+        }else {
+            timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", min, sec);// if the user inputs less than or equal to 60 mins
+        }
+        timeTextView.setText(timeLeftFormatted);
     }
 }
 

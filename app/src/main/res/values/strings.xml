@@ -13,5 +13,5 @@
     <string name="signature_title">Your CallSign</string>
     <string name="static_title">Static?</string>
     <string name="CW_title">CW Speed(wpm)</string>
-    <string name="time_title">Time</string>
+    <string name="time_title">Time(minutes)</string>
 </resources>

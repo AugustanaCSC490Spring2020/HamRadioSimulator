@@ -56,10 +56,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), GameActivity.class);
                 startActivity(intent);
-                download();
             }
         });
-
+        download();
     }
     public void download() {
         storageReference = firebaseStorage.getReference();

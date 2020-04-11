@@ -17,8 +17,8 @@
             android:singleLine="true"
             android:title="@string/CW_title" />
         <EditTextPreference
-            android:defaultValue="Default value"
-            android:key="edit_text_preference_1"
+            android:defaultValue="5"
+            android:key="edit_text_preference_2"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="@string/time_title" />
