@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        guessEditText = findViewById(R.id.guessEditText);
+        scoreNumTextView = findViewById(R.id.scoreNumTextView);
+
         dash = soundPool.load(this, R.raw.dash, 1);
         dot = soundPool.load(this, R.raw.dot, 1);
 
@@ -82,9 +86,25 @@ public class GameActivity extends AppCompatActivity {
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cw = MorseCreator.createMorse(getRandomCallsign()); //test
+                callsign = getRandomCallsign();
+                String cw = MorseCreator.createMorse(callsign); //test
                 Log.d("CW: ", "onClick: " + cw);
                 MorseCreator.playSound(cw, 333);
+                guessEditText.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if(keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
+                                i == KeyEvent.KEYCODE_ENTER) {
+                            if(guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
+                                Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
+                                scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                            }
+                            guessEditText.setText("");
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         });
         fileToList();
