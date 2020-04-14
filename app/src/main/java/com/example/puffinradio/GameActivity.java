@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,10 +39,11 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long time;
     int cwSpeed = 0;
-    boolean hasStatic = false;
+    boolean hasStatic = true;
     String callsign = "";
     SoundPool soundPool;
     int dash, dot; //http://onlinetonegenerator.com/
+    int staticSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,6 @@ public class GameActivity extends AppCompatActivity {
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         }
 
-
         settingsButton = (Button) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +77,7 @@ public class GameActivity extends AppCompatActivity {
         guessEditText = findViewById(R.id.guessEditText);
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
 
-        dash = soundPool.load(this, R.raw.dash, 1);
-        dot = soundPool.load(this, R.raw.dot, 1);
+        staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
         sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
         //TODO: FIX WPM
@@ -111,6 +111,26 @@ public class GameActivity extends AppCompatActivity {
         fileToList();
         timer();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                if(hasStatic) {
+                    soundPool.play(staticSound, 1, 1, 0, -1, 1);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        soundPool.autoPause();
+    }
+
     private void fileToList(){
         String fileName = getFilesDir().getPath() + "/" + "callsigns.txt";
         File file = new File(fileName);
