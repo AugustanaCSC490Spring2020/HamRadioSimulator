@@ -26,6 +26,7 @@
             android:text="@string/about_page"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"
+            android:autoLink="web"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/scrollView2"
             app:layout_constraintStart_toStartOf="parent"
