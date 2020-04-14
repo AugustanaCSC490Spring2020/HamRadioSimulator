@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
                 startActivity(intent);
+                countDownTimer.cancel();
             }
         });
 
@@ -140,7 +141,7 @@ public class GameActivity extends AppCompatActivity {
     //This method is used to start the timer
     private void timer(){
        int minTime  = Integer.parseInt(getTimePreferences()); // changes string input into an int
-       time = TimeUnit.MINUTES.toMillis(minTime); // Since time input is is in min, this changes it into miliseconds
+       time = TimeUnit.MINUTES.toMillis(minTime) + 1000; // Since time input is is in min, this changes it into miliseconds
         countDownTimer = new CountDownTimer(time, 1000) {
             @Override
             public void onTick(long millisUntilFinished ) {
