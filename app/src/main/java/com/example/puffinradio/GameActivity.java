@@ -100,6 +100,7 @@ public class GameActivity extends AppCompatActivity {
                                 scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
                             }
                             guessEditText.setText("");
+                            callsign = "";
                             return true;
                         }
                         return false;
@@ -148,7 +149,9 @@ public class GameActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                startActivity(new Intent(GameActivity.this,EndActivity.class)); // when the timer is done it goes to the end activity
+                Intent intent = new Intent(GameActivity.this, EndActivity.class);
+                intent.putExtra("score", scoreNumTextView.getText().toString());
+                startActivity(intent); // when the timer is done it goes to the end activity
                 countDownTimer.cancel();
             }
         }.start();

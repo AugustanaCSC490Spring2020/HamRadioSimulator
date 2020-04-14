@@ -22,6 +22,9 @@ public class EndActivity extends AppCompatActivity {
         leaderboardButton = (Button)findViewById(R.id.endLeaderboardButton);
         scoreView = (TextView)findViewById(R.id.scoreTextView);
 
+        String score = this.getIntent().getStringExtra("score");
+        scoreView.setText(score);
+
         mainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
