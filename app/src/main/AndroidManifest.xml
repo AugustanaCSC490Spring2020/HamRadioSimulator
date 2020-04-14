@@ -17,10 +17,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".GameActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GameActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity android:windowSoftInputMode="adjustResize"
                   android:name=".GameActivity">

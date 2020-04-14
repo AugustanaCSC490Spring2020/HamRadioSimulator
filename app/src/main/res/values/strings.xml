@@ -15,4 +15,5 @@
     <string name="static_title">Static?</string>
     <string name="CW_title">CW Speed(wpm)</string>
     <string name="time_title">Time(minutes)</string>
+    <string name="play">PLAY</string>
 </resources>
