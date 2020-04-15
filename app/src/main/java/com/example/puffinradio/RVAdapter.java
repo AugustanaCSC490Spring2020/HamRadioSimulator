@@ -1,6 +1,5 @@
 package com.example.puffinradio;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
     public void onBindViewHolder(GuessViewHolder guessViewHolder, int i) {
         String callSign = guesses.keySet().toArray()[i].toString();
         guessViewHolder.guess.setText(callSign);
-        guessViewHolder.correct.setText(guesses.get(callSign).toString());
+        String correct;
+        if(guesses.get(callSign)) {
+            correct = "Y";
+        } else {
+            correct = "N";
+        }
+        guessViewHolder.correct.setText(correct);
     }
 
     @Override

@@ -87,6 +87,7 @@ public class GameActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler);
         guesses = new LinkedHashMap<>();
         LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
