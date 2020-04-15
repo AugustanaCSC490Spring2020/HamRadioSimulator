@@ -2,6 +2,9 @@ package com.example.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -24,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -39,11 +43,13 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long time;
     int cwSpeed = 0;
-    boolean hasStatic = true;
+    boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
     int dash, dot; //http://onlinetonegenerator.com/
     int staticSound;
+    LinkedHashMap<String, Boolean> guesses;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,11 @@ public class GameActivity extends AppCompatActivity {
         guessEditText = findViewById(R.id.guessEditText);
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
 
+        recyclerView = findViewById(R.id.recycler);
+        guesses = new LinkedHashMap<>();
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
         sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
@@ -95,13 +106,18 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
                         if(keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
-                                i == KeyEvent.KEYCODE_ENTER) {
+                                i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
                             if(guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
                                 Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
                                 scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                                guesses.put(callsign, true);
+                            } else {
+                                guesses.put(callsign, false);
                             }
                             guessEditText.setText("");
                             callsign = "";
+                            RVAdapter adapter = new RVAdapter(guesses);
+                            recyclerView.setAdapter(adapter);
                             return true;
                         }
                         return false;
