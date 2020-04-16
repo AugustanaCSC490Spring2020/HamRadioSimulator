@@ -41,6 +41,8 @@ public class GameActivity extends AppCompatActivity {
     private EditText guessEditText;
     private List<String> callSignList = new ArrayList<String>();
     private CountDownTimer countDownTimer;
+
+    SharedPreferences sharedPreferences;
     private long time;
     int cwSpeed = 0;
     boolean hasStatic = false;
@@ -170,7 +172,7 @@ public class GameActivity extends AppCompatActivity {
     }
     //This method is used to get the time input from the settings
     private String getTimePreferences(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("edit_text_preference_2", "5");
     }
     private String getRandomCallsign() {
@@ -210,16 +212,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String getC() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("WPM", "20");
     }
 
     private double findCW(String C){
-
-
-
-
         return 1.2/Integer.parseInt(C);
+    }
+
+    private String getStatic() {
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        return sharedPreferences.getString("switch_preference_1", "false");
     }
 }
 

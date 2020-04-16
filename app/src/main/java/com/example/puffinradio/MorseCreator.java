@@ -55,7 +55,7 @@ public class MorseCreator {
 
     public static void playSound(String morse, double unitLength) {
         int timer = 0;
-        c=unitLength;
+
         genDah(unitLength);
         genDit(unitLength);
         for(int i = 0; i < morse.length(); i++) {
@@ -84,7 +84,8 @@ public class MorseCreator {
     }
 
     static void genDah(double unitLength) {
-        final double duration = unitLength * 3;//in sec
+        Log.d(TAG, "genDah:" + unitLength);
+        final double duration = .999;//in sec
 
         final double numSamples = duration * sampleRate;
         final double sample[] = new double[(int) numSamples];
@@ -111,7 +112,7 @@ public class MorseCreator {
     }
     static void genDit(double unitLength){
 
-        final double duration = unitLength;//in sec
+        final double duration = .333;//in sec
 
         final double numSamples = duration * sampleRate;
         final double sample[] = new double[(int) numSamples];
