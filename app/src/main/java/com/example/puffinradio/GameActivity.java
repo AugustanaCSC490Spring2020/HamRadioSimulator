@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,14 +34,16 @@ import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     private Button settingsButton;
-    private Button sendCallSignButton;
+    private Button replayCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
     private List<String> callSignList = new ArrayList<String>();
     private CountDownTimer countDownTimer;
+
+    SharedPreferences sharedPreferences;
+
     private long time;
-    int cwSpeed = 0;
     boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
@@ -94,12 +95,12 @@ public class GameActivity extends AppCompatActivity {
         manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
-        sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
-        sendCallSignButton.setEnabled(false);
+        replayCallSignButton = (Button)findViewById(R.id.replayCallSignButton);
+        replayCallSignButton.setEnabled(false);
 
         MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
         // Just using the button for testing purposes for now; "hello world"
-        sendCallSignButton.setOnClickListener(new View.OnClickListener() {
+        replayCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callsign = getRandomCallsign();
@@ -107,7 +108,9 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("CW: ", "onClick: " + cw);
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
-                MorseCreator.playSound(cw, transmissionSpeed);
+
+                MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -143,7 +146,7 @@ public class GameActivity extends AppCompatActivity {
                 if(hasStatic) {
                     soundPool.play(staticSound, 1, 1, 0, -1, 1);
                 }
-                sendCallSignButton.setEnabled(true);
+                replayCallSignButton.setEnabled(true);
                 guessEditText.setEnabled(true);
                 timer();
             }
@@ -175,7 +178,7 @@ public class GameActivity extends AppCompatActivity {
     }
     //This method is used to get the time input from the settings
     private String getTimePreferences(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("edit_text_preference_2", "5");
     }
     private String getRandomCallsign() {
@@ -215,16 +218,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String getC() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("WPM", "20");
     }
 
     private double findCW(String C){
-
-
-
-
         return 1.2/Integer.parseInt(C);
+    }
+
+    private String getStatic() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        return sharedPreferences.getString("switch_preference_1", "false");
     }
 }
 

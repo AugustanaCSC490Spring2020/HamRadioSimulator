@@ -28,8 +28,8 @@ public class MorseCreator {
     static final int sampleRate = 8000;
     private static final double freqOfTone = 200; // hz
 
-    int unit;
-    int c;//wpm
+    static double  unit;
+    static double  c;//wpm
 
 
     private static byte[] generatedDit;
@@ -53,10 +53,11 @@ public class MorseCreator {
         return morse;
     }
 
-    public static void playSound(String morse, double unitLength) {
+    public static void playSound(String morse, double unitLength, double transSpeed) {
         int timer = 0;
-        genDah();
-        genDit();
+
+        genDah(transSpeed);
+        genDit(transSpeed);
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '.') {
                 handler.postDelayed(new Runnable() {
@@ -82,8 +83,9 @@ public class MorseCreator {
         }
     }
 
-    static void genDah() {
-        final double duration = .999;//in sec
+    static void genDah(double u) {
+        //Log.d(TAG, "genDah:" + unitLength);
+        final double duration = u;//in sec
 
         final double numSamples = duration * sampleRate;
         final double sample[] = new double[(int) numSamples];
@@ -108,9 +110,9 @@ public class MorseCreator {
 
         }
     }
-    static void genDit(){
+    static void genDit(double u){
 
-        final double duration = .333;//in sec
+        final double duration = u;//in sec
 
         final double numSamples = duration * sampleRate;
         final double sample[] = new double[(int) numSamples];
