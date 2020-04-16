@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     private Button settingsButton;
-    private Button playCallSignButton;
+    private Button replayCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
@@ -93,11 +93,11 @@ public class GameActivity extends AppCompatActivity {
 
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
-        playCallSignButton = (Button)findViewById(R.id.playCallSignButton);
+        replayCallSignButton = (Button)findViewById(R.id.replayCallSignButton);
         //TODO: FIX WPM
         MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
         // Just using the button for testing purposes for now; "hello world"
-        playCallSignButton.setOnClickListener(new View.OnClickListener() {
+        replayCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callsign = getRandomCallsign();
@@ -107,8 +107,6 @@ public class GameActivity extends AppCompatActivity {
                 double transmissionSpeed = findCW(WPM);
 
                 MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
-                playCallSignButton.setText("Replay Call sign");
-
 
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
