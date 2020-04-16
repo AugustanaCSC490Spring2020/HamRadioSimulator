@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     private Button settingsButton;
-    private Button sendCallSignButton;
+    private Button playCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
@@ -94,11 +93,11 @@ public class GameActivity extends AppCompatActivity {
 
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
-        sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
+        playCallSignButton = (Button)findViewById(R.id.playCallSignButton);
         //TODO: FIX WPM
         MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
         // Just using the button for testing purposes for now; "hello world"
-        sendCallSignButton.setOnClickListener(new View.OnClickListener() {
+        playCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callsign = getRandomCallsign();
@@ -107,6 +106,8 @@ public class GameActivity extends AppCompatActivity {
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
                 MorseCreator.playSound(cw, transmissionSpeed);
+                playCallSignButton.setText("Replay Call sign");
+
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {

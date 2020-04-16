@@ -15,18 +15,18 @@
         android:layout_marginBottom="4dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sendCallSignButton"
+        app:layout_constraintEnd_toStartOf="@+id/playCallSignButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/sendCallSignButton"
+        android:id="@+id/playCallSignButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="4dp"
-        android:text="Send Call Sign"
+        android:text="Play Call Sign"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView20"
@@ -70,7 +70,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sendCallSignButton" />
+        app:layout_constraintStart_toEndOf="@+id/playCallSignButton" />
 
     <TextView
         android:id="@+id/scoreNumTextView"
