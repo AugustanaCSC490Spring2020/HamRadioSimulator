@@ -71,6 +71,8 @@ public class GameActivity extends AppCompatActivity {
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         }
 
+        staticSound = soundPool.load(this, R.raw.staticsound, 1);
+
         settingsButton = (Button) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,16 +86,17 @@ public class GameActivity extends AppCompatActivity {
         guessEditText = findViewById(R.id.guessEditText);
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
 
+        guessEditText.setEnabled(false);
+
         recyclerView = findViewById(R.id.recycler);
         guesses = new LinkedHashMap<>();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
-        staticSound = soundPool.load(this, R.raw.staticsound, 1);
-
         sendCallSignButton = (Button)findViewById(R.id.sendCallSignButton);
-        //TODO: FIX WPM
+        sendCallSignButton.setEnabled(false);
+
         MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
         // Just using the button for testing purposes for now; "hello world"
         sendCallSignButton.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +132,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         fileToList();
-        timer();
     }
 
     @Override
@@ -141,6 +143,9 @@ public class GameActivity extends AppCompatActivity {
                 if(hasStatic) {
                     soundPool.play(staticSound, 1, 1, 0, -1, 1);
                 }
+                sendCallSignButton.setEnabled(true);
+                guessEditText.setEnabled(true);
+                timer();
             }
         });
     }
