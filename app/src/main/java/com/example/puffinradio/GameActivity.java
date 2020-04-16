@@ -102,7 +102,9 @@ public class GameActivity extends AppCompatActivity {
                 callsign = getRandomCallsign();
                 String cw = MorseCreator.createMorse(callsign); //test
                 Log.d("CW: ", "onClick: " + cw);
-                MorseCreator.playSound(cw, 333);
+                String WPM = getC();
+                double transmissionSpeed = findCW(WPM);
+                MorseCreator.playSound(cw, transmissionSpeed);
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -205,6 +207,19 @@ public class GameActivity extends AppCompatActivity {
             timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", min, sec);// if the user inputs less than or equal to 60 mins
         }
         timeTextView.setText(timeLeftFormatted);
+    }
+
+    private String getC() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        return sharedPreferences.getString("WPM", "20");
+    }
+
+    private double findCW(String C){
+
+
+
+
+        return 1.2/Integer.parseInt(C);
     }
 }
 
