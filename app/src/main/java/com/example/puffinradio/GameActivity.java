@@ -43,8 +43,8 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
 
     SharedPreferences sharedPreferences;
+
     private long time;
-    int cwSpeed = 0;
     boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
@@ -106,7 +106,7 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("CW: ", "onClick: " + cw);
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
-                MorseCreator.playSound(cw, transmissionSpeed);
+                MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -212,7 +212,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String getC() {
-         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("WPM", "20");
     }
 
@@ -221,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String getStatic() {
-         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("switch_preference_1", "false");
     }
 }
