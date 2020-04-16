@@ -33,7 +33,6 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
-    private Button settingsButton;
     private Button replayCallSignButton;
     private TextView timeTextView;
     private TextView scoreNumTextView;
@@ -73,16 +72,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
-
-        settingsButton = (Button) findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
-                startActivity(intent);
-                countDownTimer.cancel();
-            }
-        });
 
         guessEditText = findViewById(R.id.guessEditText);
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
