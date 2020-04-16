@@ -113,7 +113,13 @@ public class GameActivity extends AppCompatActivity {
                                 guesses.put(callsign, false);
                             }
                             guessEditText.setText("");
-                            callsign = "";
+                            callsign = getRandomCallsign();
+                            String cw = MorseCreator.createMorse(callsign); //test
+                            Log.d("CW: ", "onClick: " + cw);
+                            String WPM = getC();
+                            double transmissionSpeed = findCW(WPM);
+                            MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
                             RVAdapter adapter = new RVAdapter(guesses);
                             recyclerView.setAdapter(adapter);
                             return true;
@@ -125,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
         });
         fileToList();
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
