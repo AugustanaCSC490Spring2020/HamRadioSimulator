@@ -16,4 +16,5 @@
     <string name="CW_title">CW Speed(wpm)</string>
     <string name="time_title">Time(minutes)</string>
     <string name="play">PLAY</string>
+    <string name="start_button">Start Game</string>
 </resources>

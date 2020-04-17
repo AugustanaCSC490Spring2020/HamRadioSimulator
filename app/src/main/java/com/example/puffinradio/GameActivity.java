@@ -39,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
     private EditText guessEditText;
     private List<String> callSignList = new ArrayList<String>();
     private CountDownTimer countDownTimer;
+    private Button startGameButton;
 
     SharedPreferences sharedPreferences;
     private long time;
@@ -72,6 +73,21 @@ public class GameActivity extends AppCompatActivity {
 
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
+
+        startGameButton = findViewById(R.id.startGameButton);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGameButton.setVisibility(View.INVISIBLE);
+                callsign = getRandomCallsign();
+                String cw = MorseCreator.createMorse(callsign);
+                Log.d("CW: ", "onClick: " + cw);
+                String WPM = getC();
+                double transmissionSpeed = findCW(WPM);
+                MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+            }
+        });
+
         guessEditText = findViewById(R.id.guessEditText);
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
 
@@ -91,7 +107,6 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callsign = getRandomCallsign();
                 String cw = MorseCreator.createMorse(callsign); //test
                 Log.d("CW: ", "onClick: " + cw);
                 String WPM = getC();
