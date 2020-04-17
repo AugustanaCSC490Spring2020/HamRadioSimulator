@@ -5,7 +5,7 @@
         app:title="@string/messages_header">
 
         <EditTextPreference
-            android:defaultValue="false"
+            android:defaultValue ="false"
             app:key="signature"
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
@@ -25,7 +25,7 @@
             android:title="@string/time_title"
             app:useSimpleSummaryProvider="true"/>
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="switch_preference_1"
             android:title="@string/static_title"
             app:useSimpleSummaryProvider="true"/>

@@ -41,15 +41,14 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
 
     SharedPreferences sharedPreferences;
-
     private long time;
-    boolean hasStatic = false;
     String callsign = "";
     SoundPool soundPool;
     int dash, dot; //http://onlinetonegenerator.com/
     int staticSound;
     LinkedHashMap<String, Boolean> guesses;
     RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if(hasStatic) {
+                if(getStatic()) {
                     soundPool.play(staticSound, 1, 1, 0, -1, 1);
                 }
                 replayCallSignButton.setEnabled(true);
@@ -152,6 +151,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         soundPool.autoPause();
+        countDownTimer.cancel();
     }
 
     private void fileToList(){
@@ -173,7 +173,7 @@ public class GameActivity extends AppCompatActivity {
     }
     //This method is used to get the time input from the settings
     private String getTimePreferences(){
-         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getString("edit_text_preference_2", "5");
     }
     private String getRandomCallsign() {
@@ -192,10 +192,10 @@ public class GameActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                Intent intent = new Intent(GameActivity.this, EndActivity.class);
-                intent.putExtra("score", scoreNumTextView.getText().toString());
-                startActivity(intent); // when the timer is done it goes to the end activity
-                countDownTimer.cancel();
+                    Intent intent = new Intent(GameActivity.this, EndActivity.class);
+                    intent.putExtra("score", scoreNumTextView.getText().toString());
+                    startActivity(intent); // when the timer is done it goes to the end activity
+                    countDownTimer.cancel();
             }
         }.start();
     }
@@ -211,6 +211,10 @@ public class GameActivity extends AppCompatActivity {
         }
         timeTextView.setText(timeLeftFormatted);
     }
+    private String getUsersCallSign(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        return sharedPreferences.getString("signature",getRandomCallsign());
+    }
 
     private String getC() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
@@ -221,9 +225,9 @@ public class GameActivity extends AppCompatActivity {
         return 1.2/Integer.parseInt(C);
     }
 
-    private String getStatic() {
+    private boolean getStatic() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("switch_preference_1", "false");
+        return sharedPreferences.getBoolean("switch_preference_1", true);
     }
 }
 
