@@ -78,6 +78,9 @@ public class GameActivity extends AppCompatActivity {
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                timer();
+                guessEditText.setEnabled(true);
+                replayCallSignButton.setEnabled(true);
                 startGameButton.setVisibility(View.INVISIBLE);
                 callsign = getRandomCallsign();
                 String cw = MorseCreator.createMorse(callsign);
@@ -92,6 +95,7 @@ public class GameActivity extends AppCompatActivity {
         scoreNumTextView = findViewById(R.id.scoreNumTextView);
 
         guessEditText.setEnabled(false);
+
 
         recyclerView = findViewById(R.id.recycler);
         guesses = new LinkedHashMap<>();
@@ -155,9 +159,6 @@ public class GameActivity extends AppCompatActivity {
                 if(getStatic()) {
                     soundPool.play(staticSound, 1, 1, 0, -1, 1);
                 }
-                replayCallSignButton.setEnabled(true);
-                guessEditText.setEnabled(true);
-                timer();
             }
         });
     }
