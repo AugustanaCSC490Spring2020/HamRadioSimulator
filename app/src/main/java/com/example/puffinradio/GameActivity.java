@@ -107,7 +107,6 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton.setEnabled(false);
 
         MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
-        // Just using the button for testing purposes for now; "hello world"
         replayCallSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
