@@ -148,10 +148,20 @@ public class MorseCreator {
                 AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length);
         try {
+            audioTrack.setNotificationMarkerPosition(generatedSnd.length);
+            audioTrack.setPlaybackPositionUpdateListener(new AudioTrack.OnPlaybackPositionUpdateListener() {
+                @Override
+                public void onPeriodicNotification(AudioTrack track) {
+                    //
+                }
+                @Override
+                public void onMarkerReached(AudioTrack track) {
+                    audioTrack.release();
+                }
+            });
             audioTrack.play();
-            audioTrack.release();
         } catch(IllegalStateException e) {
-            Log.d(TAG, "playMorse: failed");
+            Log.d(TAG, "playMorse: failed" + e.getStackTrace());
         }
     }
 
