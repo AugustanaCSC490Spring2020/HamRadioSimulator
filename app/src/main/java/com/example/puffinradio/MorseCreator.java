@@ -85,7 +85,7 @@ public class MorseCreator {
 
     static void genDah(double u) {
         //Log.d(TAG, "genDah:" + unitLength);
-        final double duration = u;//in sec
+        final double duration = u*3.0;//in sec
 
         final double numSamples = duration * sampleRate;
         final double sample[] = new double[(int) numSamples];
@@ -93,7 +93,7 @@ public class MorseCreator {
         generatedDah = new byte[2 *  (int) numSamples];
 
         // fill out the array
-        for (int i = 0; i < numSamples; ++i) {
+        for (int i = 0; i < numSamples - 1; ++i) {
             sample[i] = Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
         }
 
