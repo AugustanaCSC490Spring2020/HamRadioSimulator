@@ -88,6 +88,33 @@ public class GameActivity extends AppCompatActivity {
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
                 MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+                guessEditText.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if(keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
+                                i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
+                            if(guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
+                                Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
+                                scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                                guesses.put(callsign, true);
+                            } else {
+                                guesses.put(callsign, false);
+                            }
+                            guessEditText.setText("");
+                            callsign = getRandomCallsign();
+                            String cw = MorseCreator.createMorse(callsign); //test
+                            Log.d("CW: ", "onClick: " + cw);
+                            String WPM = getC();
+                            double transmissionSpeed = findCW(WPM);
+                            MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
+                            RVAdapter adapter = new RVAdapter(guesses);
+                            recyclerView.setAdapter(adapter);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         });
 
@@ -116,34 +143,6 @@ public class GameActivity extends AppCompatActivity {
                 double transmissionSpeed = findCW(WPM);
 
                 MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
-
-                guessEditText.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                        if(keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
-                                i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
-                            if(guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
-                                Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
-                                scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
-                                guesses.put(callsign, true);
-                            } else {
-                                guesses.put(callsign, false);
-                            }
-                            guessEditText.setText("");
-                            callsign = getRandomCallsign();
-                            String cw = MorseCreator.createMorse(callsign); //test
-                            Log.d("CW: ", "onClick: " + cw);
-                            String WPM = getC();
-                            double transmissionSpeed = findCW(WPM);
-                            MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
-
-                            RVAdapter adapter = new RVAdapter(guesses);
-                            recyclerView.setAdapter(adapter);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
             }
         });
         fileToList();
