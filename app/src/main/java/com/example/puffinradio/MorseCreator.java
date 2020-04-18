@@ -147,8 +147,12 @@ public class MorseCreator {
                 AudioFormat.ENCODING_PCM_16BIT, generatedSnd.length,
                 AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length);
-        audioTrack.play();
-        Log.d(TAG, "playMorse: played");
+        try {
+            audioTrack.play();
+            audioTrack.release();
+        } catch(IllegalStateException e) {
+            Log.d(TAG, "playMorse: failed");
+        }
     }
 
     public static void initializeMorseCreator(SoundPool soundPoolInit, int dotInit, int dashInit, int wpmInit) {
