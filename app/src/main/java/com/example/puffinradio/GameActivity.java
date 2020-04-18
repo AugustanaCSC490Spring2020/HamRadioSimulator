@@ -13,6 +13,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -49,6 +50,8 @@ public class GameActivity extends AppCompatActivity {
     int staticSound;
     LinkedHashMap<String, Boolean> guesses;
     RecyclerView recyclerView;
+    boolean donePlaying = false;
+    static Handler handler = new Handler();
 
 
     @Override
@@ -80,18 +83,27 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 timer();
                 guessEditText.setEnabled(true);
-                replayCallSignButton.setEnabled(true);
                 startGameButton.setVisibility(View.INVISIBLE);
                 callsign = getRandomCallsign();
                 String cw = MorseCreator.createMorse(callsign);
                 Log.d("CW: ", "onClick: " + cw);
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
-                MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+                donePlaying = false;
+                replayCallSignButton.setEnabled(false);
+                int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        donePlaying = true;
+                        replayCallSignButton.setEnabled(true);
+                    }
+                }, length);
                 guessEditText.setOnKeyListener(new View.OnKeyListener() {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                        if(keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
+                        if(donePlaying && keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
                                 i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
                             if(guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
                                 Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
@@ -106,7 +118,17 @@ public class GameActivity extends AppCompatActivity {
                             Log.d("CW: ", "onClick: " + cw);
                             String WPM = getC();
                             double transmissionSpeed = findCW(WPM);
-                            MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+                            donePlaying = false;
+                            replayCallSignButton.setEnabled(false);
+                            int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    donePlaying = true;
+                                    replayCallSignButton.setEnabled(true);
+                                }
+                            }, length);
 
                             RVAdapter adapter = new RVAdapter(guesses);
                             recyclerView.setAdapter(adapter);
@@ -142,7 +164,17 @@ public class GameActivity extends AppCompatActivity {
                 String WPM = getC();
                 double transmissionSpeed = findCW(WPM);
 
-                MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+                donePlaying = false;
+                replayCallSignButton.setEnabled(false);
+                int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        donePlaying = true;
+                        replayCallSignButton.setEnabled(true);
+                    }
+                }, length);
             }
         });
         fileToList();

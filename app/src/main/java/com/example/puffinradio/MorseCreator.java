@@ -53,7 +53,7 @@ public class MorseCreator {
         return morse;
     }
 
-    public static void playSound(String morse, double unitLength, double transSpeed) {
+    public static int playSound(String morse, double unitLength, double transSpeed) {
         int timer = 0;
 
         genDah(transSpeed);
@@ -81,6 +81,7 @@ public class MorseCreator {
                 timer += unitLength * 2;
             }
         }
+        return timer;
     }
 
     static void genDah(double u) {
