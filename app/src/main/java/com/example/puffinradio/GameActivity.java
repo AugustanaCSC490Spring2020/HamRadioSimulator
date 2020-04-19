@@ -123,12 +123,14 @@ public class GameActivity extends AppCompatActivity {
         super.onResume();
         startGameButton = findViewById(R.id.startGameButton);
         final boolean[] loaded = {false};
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                loaded[0] = true;
-            }
-        });
+        while(!loaded[0]) {
+            soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                    loaded[0] = true;
+                }
+            });
+        }
         startGameButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
