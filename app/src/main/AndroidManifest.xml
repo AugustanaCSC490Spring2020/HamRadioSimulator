@@ -23,7 +23,8 @@
         </activity>
         <activity android:windowSoftInputMode="adjustResize"
                   android:name=".GameActivity"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GameActivity" />
@@ -45,6 +46,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
