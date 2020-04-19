@@ -30,7 +30,7 @@ public class MorseCreator {
 
     static double  unit;
     static double  c;//wpm
-
+    double soundLength;
 
     private static byte[] generatedDit;
     private static byte[] generatedDah;
@@ -53,7 +53,7 @@ public class MorseCreator {
         return morse;
     }
 
-    public static int playSound(String morse, double unitLength, double transSpeed) {
+    public static int playSound(String morse, final double unitLength, double transSpeed) {
         int timer = 0;
 
         genDah(transSpeed);
@@ -63,7 +63,7 @@ public class MorseCreator {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        playMorse(sampleRate, generatedDit);
+                        playMorse(sampleRate, generatedDit, (int)unitLength);
                     }
                 }, timer);
                 timer += unitLength * 2;
@@ -71,7 +71,7 @@ public class MorseCreator {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        playMorse(sampleRate, generatedDah);
+                        playMorse(sampleRate, generatedDah, (int)unitLength*3);
                     }
                 },timer);
 
@@ -142,28 +142,21 @@ public class MorseCreator {
 
     }
 
-    static void playMorse(int sampleRate, byte[] generatedSnd){
+    static void playMorse(int sampleRate, byte[] generatedSnd, int length){
         final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                 sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, generatedSnd.length,
                 AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length);
-        try {
-            audioTrack.setNotificationMarkerPosition(generatedSnd.length);
-            audioTrack.setPlaybackPositionUpdateListener(new AudioTrack.OnPlaybackPositionUpdateListener() {
-                @Override
-                public void onPeriodicNotification(AudioTrack track) {
-                    //
-                }
-                @Override
-                public void onMarkerReached(AudioTrack track) {
-                    audioTrack.release();
-                }
-            });
+
             audioTrack.play();
-        } catch(IllegalStateException e) {
-            Log.d(TAG, "playMorse: failed" + e.getStackTrace());
+        try {
+            Thread.sleep((int) length);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        audioTrack.release();
+
     }
 
     public static void initializeMorseCreator(SoundPool soundPoolInit, int dotInit, int dashInit, int wpmInit) {
