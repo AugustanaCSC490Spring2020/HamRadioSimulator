@@ -196,6 +196,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         soundPool.autoPause();
+        MorseCreator.handler.removeCallbacksAndMessages(null);
         countDownTimer.cancel();
     }
 
