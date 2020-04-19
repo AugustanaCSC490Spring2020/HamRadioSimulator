@@ -76,10 +76,66 @@ public class GameActivity extends AppCompatActivity {
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
 
+
+
+        guessEditText = findViewById(R.id.guessEditText);
+        scoreNumTextView = findViewById(R.id.scoreNumTextView);
+
+        guessEditText.setEnabled(false);
+
+
+        recyclerView = findViewById(R.id.recycler);
+        guesses = new LinkedHashMap<>();
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(manager);
+
+        replayCallSignButton = (Button)findViewById(R.id.replayCallSignButton);
+        replayCallSignButton.setEnabled(false);
+
+        MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
+        replayCallSignButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cw = MorseCreator.createMorse(callsign); //test
+                Log.d("CW: ", "onClick: " + cw);
+                String WPM = getC();
+                double transmissionSpeed = findCW(WPM);
+
+                donePlaying = false;
+                replayCallSignButton.setEnabled(false);
+                int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        donePlaying = true;
+                        replayCallSignButton.setEnabled(true);
+                    }
+                }, length);
+            }
+        });
+        fileToList();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
         startGameButton = findViewById(R.id.startGameButton);
+        final boolean[] loaded = {false};
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                loaded[0] = true;
+            }
+        });
         startGameButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                if(getStatic()&&loaded[0]) {
+                    soundPool.play(staticSound, 1, 1, 0, -1, 1);
+                }
                 timer();
                 guessEditText.setEnabled(true);
                 startGameButton.setVisibility(View.INVISIBLE);
@@ -139,57 +195,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        guessEditText = findViewById(R.id.guessEditText);
-        scoreNumTextView = findViewById(R.id.scoreNumTextView);
-
-        guessEditText.setEnabled(false);
-
-
-        recyclerView = findViewById(R.id.recycler);
-        guesses = new LinkedHashMap<>();
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(manager);
-
-        replayCallSignButton = (Button)findViewById(R.id.replayCallSignButton);
-        replayCallSignButton.setEnabled(false);
-
-        MorseCreator.initializeMorseCreator(soundPool, dot, dash, 1);
-        replayCallSignButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String cw = MorseCreator.createMorse(callsign); //test
-                Log.d("CW: ", "onClick: " + cw);
-                String WPM = getC();
-                double transmissionSpeed = findCW(WPM);
-
-                donePlaying = false;
-                replayCallSignButton.setEnabled(false);
-                int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        donePlaying = true;
-                        replayCallSignButton.setEnabled(true);
-                    }
-                }, length);
-            }
-        });
-        fileToList();
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if(getStatic()) {
-                    soundPool.play(staticSound, 1, 1, 0, -1, 1);
-                }
-            }
-        });
     }
 
     @Override
@@ -274,6 +279,7 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         return sharedPreferences.getBoolean("switch_preference_1", true);
     }
+
 }
 
 
