@@ -51,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     boolean donePlaying = false;
     static Handler handler = new Handler();
+    boolean loaded = false;
 
 
     @Override
@@ -122,20 +123,18 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startGameButton = findViewById(R.id.startGameButton);
-        final boolean[] loaded = {false};
-        while(!loaded[0]) {
-            soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                @Override
-                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                    loaded[0] = true;
-                }
-            });
-        }
+        startGameButton.setEnabled(false);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                startGameButton.setEnabled(true);
+            }
+        });
         startGameButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(getStatic()&&loaded[0]) {
+                if(getStatic()) {
                     soundPool.play(staticSound, 1, 1, 0, -1, 1);
                 }
                 timer();
@@ -204,7 +203,9 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         soundPool.autoPause();
         MorseCreator.handler.removeCallbacksAndMessages(null);
-        countDownTimer.cancel();
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     private void fileToList(){
