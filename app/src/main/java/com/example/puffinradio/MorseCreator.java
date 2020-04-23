@@ -159,15 +159,6 @@ public class MorseCreator {
 
     }
 
-    public static void initializeMorseCreator(SoundPool soundPoolInit, int dotInit, int dashInit, int wpmInit) {
-        soundPool = soundPoolInit;
-        dot = dotInit;
-        dash = dashInit;
-        wpm = wpmInit;
-    }
-
-
-
     public static void rest(int length) {
         handler.postDelayed(new Runnable() {
             @Override
