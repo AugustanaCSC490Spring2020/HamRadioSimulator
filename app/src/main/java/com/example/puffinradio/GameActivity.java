@@ -50,6 +50,7 @@ public class GameActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     boolean donePlaying = false;
     static Handler handler = new Handler();
+    int frq = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +207,13 @@ public class GameActivity extends AppCompatActivity {
         return sharedPreferences.getString("WPM", "20");
     }
 
+    private int getFrequency() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        String frequen = sharedPreferences.getString("frequency", "200");
+        int freq = Integer.parseInt(frequen);
+        return freq;
+    }
+
     /**
      * Calculate the speed of one unit
      *
@@ -236,6 +244,7 @@ public class GameActivity extends AppCompatActivity {
             soundPool.play(staticSound, 1, 1, 0, -1, 1);
         }
         timer();
+        frq = getFrequency();
         guessEditText.setEnabled(true);
         v.setVisibility(View.INVISIBLE);
         callsign = getRandomCallsign();
@@ -245,7 +254,8 @@ public class GameActivity extends AppCompatActivity {
         double transmissionSpeed = findCWUnitSize(WPM);
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+        Log.d("FREQ", "startGame: freq is " + frq);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
 
         enableReplayButton(length);
 
@@ -270,7 +280,7 @@ public class GameActivity extends AppCompatActivity {
                     double transmissionSpeed = findCWUnitSize(WPM);
                     donePlaying = false;
                     replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+                    int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
 
                     enableReplayButton(length);
 
@@ -296,7 +306,7 @@ public class GameActivity extends AppCompatActivity {
 
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
 
         enableReplayButton(length);
     }
@@ -315,6 +325,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }, length);
     }
+
 
 }
 

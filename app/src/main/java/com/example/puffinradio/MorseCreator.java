@@ -26,7 +26,7 @@ public class MorseCreator {
     static int wpm;
 
     static final int sampleRate = 8000;
-    private static final double freqOfTone = 200; // hz
+    private static int freqOfTone = 400; // hz
 
     static double  unit;
     static double  c;//wpm
@@ -53,9 +53,10 @@ public class MorseCreator {
         return morse;
     }
 
-    public static int playSound(String morse, final double unitLength, double transSpeed) {
+    public static int playSound(String morse, final double unitLength, double transSpeed, int freq) {
         int timer = 0;
 
+        freqOfTone = freq;
         genDah(transSpeed);
         genDit(transSpeed);
         for(int i = 0; i < morse.length(); i++) {

@@ -29,6 +29,13 @@
             android:key="switch_preference_1"
             android:title="@string/static_title"
             app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            android:defaultValue="200"
+            android:key="frequency"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/freq_edit"
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 
