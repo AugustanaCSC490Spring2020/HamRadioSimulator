@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#928BC34A"
+    android:background="#FFFFFF"
     tools:context=".EndActivity">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_marginTop="60dp"
         android:fontFamily="serif-monospace"
         android:text="Final Score:"
+        android:textColor="#000000"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +28,7 @@
         android:layout_marginTop="52dp"
         android:fontFamily="serif-monospace"
         android:text="0"
+        android:textColor="#000000"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,9 +41,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:fontFamily="serif-monospace"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="openActivity"
         android:text="Main"
+        android:textStyle="bold"
         android:textSize="24sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreTextView" />
@@ -52,9 +58,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="47dp"
         android:fontFamily="serif-monospace"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:padding="10dp"
         android:onClick="openActivity"
         android:text="Leaderboard"
         android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainMenuButton" />

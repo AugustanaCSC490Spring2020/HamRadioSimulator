@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5E8BC34A"
+    android:background="#FFFFFF"
     tools:context=".AboutActivity">
 
     <ScrollView
@@ -20,9 +20,9 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
+            android:fontFamily="serif-monospace"
             android:text="@string/about_page"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000000"

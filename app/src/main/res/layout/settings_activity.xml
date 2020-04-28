@@ -14,6 +14,7 @@
             android:layout_height="63dp"
             android:layout_gravity="bottom|right"
             android:onClick="openGameActivity"
-            android:text="@string/play" />
+            android:text="@string/play"
+            />
     </FrameLayout>
 </LinearLayout>
