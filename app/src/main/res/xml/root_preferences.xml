@@ -8,7 +8,8 @@
             android:defaultValue ="false"
             app:key="signature"
             app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            />
 
         <EditTextPreference
             android:defaultValue="20"
