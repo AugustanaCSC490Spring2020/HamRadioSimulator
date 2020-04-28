@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,9 +16,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-    private Button startButton;
-    private Button aboutButton;
-    private Button leaderBoardButton;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private StorageReference downloadReference;
@@ -30,36 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         firebaseStorage = FirebaseStorage.getInstance();
-
-        aboutButton = (Button)findViewById(R.id.aboutButton);
-        aboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AboutActivity.class);
-                startActivity(intent);
-            }
-
-        });
-
-        leaderBoardButton = (Button)findViewById(R.id.leaderBoardButton);
-        leaderBoardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), LeaderboardActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        startButton = (Button)findViewById(R.id.startButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
         download();
     }
+
+    /**
+     * Pull the call signs from Firebase
+     */
     public void download() {
         storageReference = firebaseStorage.getReference();
         downloadReference = storageReference.child("callsigns.txt");
@@ -79,5 +50,22 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             //Toast.makeText(MainActivity.this, "Failed to download file: " + e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Open whichever activity corresponds to the button pushed
+     *
+     * @param v the button pushed
+     */
+    public void openActivity(View v) {
+        Intent intent;
+        if(v.getId() == R.id.aboutButton) {
+            intent = new Intent(getBaseContext(), AboutActivity.class);
+        } else if(v.getId() == R.id.leaderBoardButton) {
+            intent = new Intent(getBaseContext(), LeaderboardActivity.class);
+        } else {
+            intent = new Intent(getBaseContext(), SettingsActivity.class);
+        }
+        startActivity(intent);
     }
 }
