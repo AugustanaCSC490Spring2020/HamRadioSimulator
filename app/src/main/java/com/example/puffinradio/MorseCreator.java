@@ -57,6 +57,10 @@ public class MorseCreator {
         int timer = 0;
 
         freqOfTone = freq;
+        if(transSpeed > 60)
+            transSpeed = 60;
+        if(transSpeed < 2)
+            transSpeed = 2;
         genDah(transSpeed);
         genDit(transSpeed);
         for(int i = 0; i < morse.length(); i++) {
