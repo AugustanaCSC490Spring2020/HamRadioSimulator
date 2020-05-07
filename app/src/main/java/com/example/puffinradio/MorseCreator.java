@@ -21,20 +21,11 @@ public class MorseCreator {
 
     static Handler handler = new Handler();
 
-    static SoundPool soundPool;
-    static int dot, dash;
-    static int wpm;
-
     static final int sampleRate = 8000;
     private static int freqOfTone = 400; // hz
 
-    static double  unit;
-    static double  c;//wpm
-    double soundLength;
-
     private static byte[] generatedDit;
     private static byte[] generatedDah;
-    private static byte[] rest;
 
 
     public static String createMorse(String callSign) {
@@ -55,7 +46,6 @@ public class MorseCreator {
     }
 
     public static int playSound(String morse, final double unitLength, double transSpeed, int freq) {
-        int timer = 0;
 
         freqOfTone = freq;
         if(transSpeed > 60)
@@ -68,13 +58,12 @@ public class MorseCreator {
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '-') {
                 indices += generatedDah.length;
-                indices += rest.length;
                 numUnits += 4;
             } else {
                 indices += generatedDit.length;
-                indices += rest.length;
                 numUnits += 2;
             }
+            indices += generatedDit.length;
         }
         byte[] morseSound = new byte[indices];
         int morseInd = 1000;
@@ -86,11 +75,9 @@ public class MorseCreator {
                 System.arraycopy(generatedDit, 0, morseSound, morseInd, generatedDit.length);
                 morseInd += generatedDit.length;
             } else {
-                System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
-                morseInd += rest.length;
+                morseInd += generatedDit.length;
             }
-            System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
-            morseInd += rest.length;
+            morseInd += generatedDit.length;
         }
 
         playMorse(sampleRate, morseSound, (int) unitLength * numUnits);
@@ -152,9 +139,6 @@ public class MorseCreator {
             generatedDit[idx++] = (byte) ((val & 0xff00) >>> 8);
 
         }
-
-        rest = new byte[generatedDit.length];
-
     }
 
     static void playMorse(int sampleRate, byte[] generatedSnd, int length){
@@ -173,14 +157,5 @@ public class MorseCreator {
             }
         }, length);
 
-    }
-
-    public static void rest(int length) {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //
-            }
-        }, length);
     }
 }
