@@ -34,6 +34,7 @@ public class MorseCreator {
 
     private static byte[] generatedDit;
     private static byte[] generatedDah;
+    private static byte[] rest;
 
 
     public static String createMorse(String callSign) {
@@ -61,30 +62,39 @@ public class MorseCreator {
             transSpeed = 60;
         if(transSpeed < 2)
             transSpeed = 2;
-        for(int i = 0; i < morse.length(); i++) {
-            if(morse.charAt(i) == '.') {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        playMorse(sampleRate, generatedDit, (int)unitLength);
-                    }
-                }, timer);
-                timer += unitLength * 2;
-            } else if(morse.charAt(i) == '-') {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        playMorse(sampleRate, generatedDah, (int)unitLength*3);
-                    }
-                },timer);
 
-                timer += unitLength * 4;
-            } else { // morse.charAt(i) == '/'
-                rest(timer);
-                timer += unitLength * 2;
+        int numUnits = 0;
+        int indices = 0;
+        for(int i = 0; i < morse.length(); i++) {
+            if(morse.charAt(i) == '-') {
+                indices += generatedDah.length;
+                indices += rest.length;
+                numUnits += 4;
+            } else {
+                indices += generatedDit.length;
+                indices += rest.length;
+                numUnits += 2;
             }
         }
-        return timer;
+        byte[] morseSound = new byte[indices];
+        int morseInd = 0;
+        for(int i = 0; i < morse.length(); i++) {
+            if(morse.charAt(i) == '-') {
+                System.arraycopy(generatedDah, 0, morseSound, morseInd, generatedDah.length);
+                morseInd += generatedDah.length;
+            } else if(morse.charAt(i) == '.') {
+                System.arraycopy(generatedDit, 0, morseSound, morseInd, generatedDit.length);
+                morseInd += generatedDit.length;
+            } else {
+                System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
+                morseInd += rest.length;
+            }
+            System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
+            morseInd += rest.length;
+        }
+
+        playMorse(sampleRate, morseSound, (int) unitLength * numUnits);
+        return (int) (unitLength * numUnits);
     }
 
     static void genDah(double u) {
@@ -143,6 +153,8 @@ public class MorseCreator {
 
         }
 
+        rest = new byte[generatedDit.length];
+
     }
 
     static void playMorse(int sampleRate, byte[] generatedSnd, int length){
@@ -152,13 +164,14 @@ public class MorseCreator {
                 AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length);
 
-            audioTrack.play();
-        try {
-            Thread.sleep((int) length);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        audioTrack.release();
+        audioTrack.play();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                audioTrack.release();
+            }
+        }, length);
 
     }
 
