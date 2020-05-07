@@ -51,8 +51,9 @@ public class GameActivity extends AppCompatActivity {
     boolean donePlaying = false;
     static Handler handler = new Handler();
     int frq = 200;
-    double transmissionSpeed;
 
+    double transmissionSpeed;
+    private GameSettings gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +92,8 @@ public class GameActivity extends AppCompatActivity {
 
         fileToList();
 
-        String WPM = getC();
-        transmissionSpeed = findCWUnitSize(WPM);
+
+        transmissionSpeed = gameSettings.getCWUnitSize();
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
     }
@@ -120,26 +121,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Get the call sign file from Firebase and add all call signs to a list
-     */
-    private void fileToList(){
-        String fileName = getFilesDir().getPath() + "/" + "callsigns.txt";
-        File file = new File(fileName);
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            DataInputStream inputStream = new DataInputStream(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String strLine;
-            while ((strLine = bufferedReader.readLine()) != null) {
-                callSignList.add(strLine);
-            }
-            inputStream.close();
-        } catch (Exception e) {
-            Toast.makeText(GameActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-        }
-    }
 
     //This method is used to get the time input from the settings
     private String getTimePreferences(){
@@ -203,15 +185,6 @@ public class GameActivity extends AppCompatActivity {
         return sharedPreferences.getString("signature",getRandomCallsign());
     }
 
-    /**
-     * Get the speed to play the call signs
-     *
-     * @return the speed
-     */
-    private String getC() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("WPM", "20");
-    }
 
     private int getFrequency() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
@@ -220,15 +193,7 @@ public class GameActivity extends AppCompatActivity {
         return freq;
     }
 
-    /**
-     * Calculate the speed of one unit
-     *
-     * @param C the speed in WPM
-     * @return the size of one unit
-     */
-    private double findCWUnitSize(String C){
-        return 1.2/Integer.parseInt(C);
-    }
+
 
     /**
      * Get whether to play static from settings
@@ -256,8 +221,8 @@ public class GameActivity extends AppCompatActivity {
         callsign = getRandomCallsign();
         String cw = MorseCreator.createMorse(callsign);
         Log.d("CW: ", "onClick: " + cw);
-        String WPM = getC();
-        double transmissionSpeed = findCWUnitSize(WPM);
+        int WPM = gameSettings.getWPM();
+        double transmissionSpeed = gameSettings.getCWUnitSize();
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
         Log.d("FREQ", "startGame: freq is " + frq);

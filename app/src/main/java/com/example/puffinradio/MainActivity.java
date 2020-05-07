@@ -28,33 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firebaseStorage = FirebaseStorage.getInstance();
-        download();
+
+
+        CallSignLibrary.download(getFilesDir());
     }
 
-    /**
-     * Pull the call signs from Firebase
-     */
-    public void download() {
-        storageReference = firebaseStorage.getReference();
-        downloadReference = storageReference.child("callsigns.txt");
-        try {
-            final File fileNameOnDevice = new File(getFilesDir(),"callsigns.txt");
-            downloadReference.getFile(fileNameOnDevice).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    //Toast.makeText(MainActivity.this, "Successful",Toast.LENGTH_LONG).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e("firebase ", ";local tem file not created");
-                }
-            });
-        } catch (Exception e) {
-            //Toast.makeText(MainActivity.this, "Failed to download file: " + e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-        }
-    }
+
 
     /**
      * Open whichever activity corresponds to the button pushed

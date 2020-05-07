@@ -14,10 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 public class SettingsActivity extends AppCompatActivity {
     boolean competitive;
 
+    private GameSettings gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
     /**
      * This creates the activity and creates the settings
      * @param savedInstanceState returns the last thing the user inputs
