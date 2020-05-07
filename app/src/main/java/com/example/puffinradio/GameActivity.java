@@ -52,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
     int frq = 200;
 
     double transmissionSpeed;
-    private GameSettings gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
+    private GameSettings gameSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
         } else {
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         }
-
+        gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
         guessEditText = findViewById(R.id.guessEditText);
@@ -92,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
         transmissionSpeed = gameSettings.getCWUnitSize();
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
+
     }
     
     @Override
@@ -208,7 +209,7 @@ public class GameActivity extends AppCompatActivity {
         callsign = CallSignLibrary.getRandomCallsign();
         String cw = MorseCreator.createMorse(callsign);
         Log.d("CW: ", "onClick: " + cw);
-        int WPM = gameSettings.getWPM();
+        double WPM = gameSettings.getWPM();
         double transmissionSpeed = gameSettings.getCWUnitSize();
         donePlaying = false;
         replayCallSignButton.setEnabled(false);

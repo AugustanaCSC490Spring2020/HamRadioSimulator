@@ -19,7 +19,7 @@ import androidx.preference.PreferenceManager;
 public class SettingsActivity extends AppCompatActivity {
     boolean competitive;
 
-    private GameSettings gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
+    private GameSettings gameSettings ;
     /**
      * This creates the activity and creates the settings
      * @param savedInstanceState returns the last thing the user inputs
@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
             difficulty.setVisibility(View.GONE);
             diffTextView.setVisibility(View.GONE);
         }
-
+        gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
     }
 
 

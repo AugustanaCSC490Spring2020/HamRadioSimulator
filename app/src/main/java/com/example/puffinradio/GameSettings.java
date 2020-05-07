@@ -11,7 +11,7 @@ public class GameSettings {
     }
 
     public int getWPM() {
-        return sharedPrefs.getInt("WPM", 5);
+        return Integer.parseInt(sharedPrefs.getString("WPM","20"));
     }
 
     public void setWPM(int newWPM) {
@@ -22,7 +22,7 @@ public class GameSettings {
     }
 
     public int getFrequency() {
-        return sharedPrefs.getInt("Freq", 400);
+        return Integer.parseInt(sharedPrefs.getString("frequency","700"));
     }
 
     /**
