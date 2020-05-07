@@ -37,7 +37,6 @@ public class GameActivity extends AppCompatActivity {
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
-    private List<String> callSignList = new ArrayList<String>();
     private CountDownTimer countDownTimer;
     private Button startGameButton;
 
@@ -90,9 +89,6 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton = findViewById(R.id.replayCallSignButton);
         replayCallSignButton.setEnabled(false);
 
-        fileToList();
-
-
         transmissionSpeed = gameSettings.getCWUnitSize();
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
@@ -129,15 +125,6 @@ public class GameActivity extends AppCompatActivity {
         return sharedPreferences.getString("edit_text_preference_2", "5");
     }
 
-    /**
-     * Get a random call sign to be played
-     *
-     * @return the call sign
-     */
-    private String getRandomCallsign() {
-        Random rand = new Random();
-        return callSignList.get(rand.nextInt(callSignList.size()));
-    }
 
     //This method is used to start the timer
     private void timer(){
@@ -182,7 +169,7 @@ public class GameActivity extends AppCompatActivity {
      */
     private String getUsersCallSign(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("signature",getRandomCallsign());
+        return sharedPreferences.getString("signature",CallSignLibrary.getRandomCallsign());
     }
 
 
@@ -218,7 +205,7 @@ public class GameActivity extends AppCompatActivity {
         frq = getFrequency();
         guessEditText.setEnabled(true);
         v.setVisibility(View.INVISIBLE);
-        callsign = getRandomCallsign();
+        callsign = CallSignLibrary.getRandomCallsign();
         String cw = MorseCreator.createMorse(callsign);
         Log.d("CW: ", "onClick: " + cw);
         int WPM = gameSettings.getWPM();
@@ -245,7 +232,7 @@ public class GameActivity extends AppCompatActivity {
                         guesses.put(callsign, false);
                     }
                     guessEditText.setText("");
-                    callsign = getRandomCallsign();
+                    callsign = CallSignLibrary.getRandomCallsign();
                     String cw = MorseCreator.createMorse(callsign); //test
                     Log.d("CW: ", "onClick: " + cw);
                     donePlaying = false;

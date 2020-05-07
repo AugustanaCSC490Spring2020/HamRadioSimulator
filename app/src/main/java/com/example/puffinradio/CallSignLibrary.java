@@ -18,25 +18,27 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CallSignLibrary {
+    private static final String CALLSIGNS_FILE_NAME = "callsigns.txt";
+
     private static List<String> callsigns = new ArrayList<>();
-
-
+    private static Random rand = new Random();
 
     /**
      * Pull the call signs from Firebase
      */
-    public static void download(File filesDir) {
+    public static void download(final File filesDir) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
-        StorageReference downloadReference = storageReference.child("callsigns.txt");
+        StorageReference downloadReference = storageReference.child(CALLSIGNS_FILE_NAME);
         try {
-            final File fileNameOnDevice = new File(filesDir,"callsigns.txt");
+            final File fileNameOnDevice = new File(filesDir,CALLSIGNS_FILE_NAME);
             downloadReference.getFile(fileNameOnDevice).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
+                    fileToList(filesDir);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -53,7 +55,7 @@ public class CallSignLibrary {
      * Get the call sign file from Firebase and add all call signs to a list
      */
     private static void fileToList(File filesDir){
-        String fileName = filesDir.getPath() + "/" + "callsigns.txt";
+        String fileName = filesDir.getPath() + "/" + CALLSIGNS_FILE_NAME;
         File file = new File(fileName);
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -73,4 +75,14 @@ public class CallSignLibrary {
     public static List<String> getList() {
         return callsigns;
     }
+
+    /**
+     * Get a random call sign to be played
+     *
+     * @return the call sign
+     */
+    public static String getRandomCallsign() {
+        return callsigns.get(rand.nextInt(callsigns.size()));
+    }
+
 }
