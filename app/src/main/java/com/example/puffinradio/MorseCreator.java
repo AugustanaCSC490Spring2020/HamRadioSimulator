@@ -64,7 +64,7 @@ public class MorseCreator {
             transSpeed = 2;
 
         int numUnits = 0;
-        int indices = 0;
+        int indices = 1000;
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '-') {
                 indices += generatedDah.length;
@@ -77,7 +77,7 @@ public class MorseCreator {
             }
         }
         byte[] morseSound = new byte[indices];
-        int morseInd = 0;
+        int morseInd = 1000;
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '-') {
                 System.arraycopy(generatedDah, 0, morseSound, morseInd, generatedDah.length);
