@@ -51,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
     boolean donePlaying = false;
     static Handler handler = new Handler();
     int frq = 200;
+    double transmissionSpeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,11 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton.setEnabled(false);
 
         fileToList();
+
+        String WPM = getC();
+        transmissionSpeed = findCWUnitSize(WPM);
+        MorseCreator.genDah(transmissionSpeed);
+        MorseCreator.genDit(transmissionSpeed);
     }
     
     @Override
@@ -256,6 +262,7 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton.setEnabled(false);
         Log.d("FREQ", "startGame: freq is " + frq);
         int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+        final double speed = transmissionSpeed;
 
         enableReplayButton(length);
 
@@ -276,11 +283,9 @@ public class GameActivity extends AppCompatActivity {
                     callsign = getRandomCallsign();
                     String cw = MorseCreator.createMorse(callsign); //test
                     Log.d("CW: ", "onClick: " + cw);
-                    String WPM = getC();
-                    double transmissionSpeed = findCWUnitSize(WPM);
                     donePlaying = false;
                     replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq);
 
                     enableReplayButton(length);
 
@@ -301,8 +306,6 @@ public class GameActivity extends AppCompatActivity {
     public void replayCallSign(View v) {
         String cw = MorseCreator.createMorse(callsign); //test
         Log.d("CW: ", "onClick: " + cw);
-        String WPM = getC();
-        double transmissionSpeed = findCWUnitSize(WPM);
 
         donePlaying = false;
         replayCallSignButton.setEnabled(false);

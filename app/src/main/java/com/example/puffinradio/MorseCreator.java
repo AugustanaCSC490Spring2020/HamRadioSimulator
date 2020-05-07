@@ -61,8 +61,6 @@ public class MorseCreator {
             transSpeed = 60;
         if(transSpeed < 2)
             transSpeed = 2;
-        genDah(transSpeed);
-        genDit(transSpeed);
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '.') {
                 handler.postDelayed(new Runnable() {
