@@ -2,6 +2,8 @@ package com.example.puffinradio;
 
 import android.content.SharedPreferences;
 
+import androidx.preference.PreferenceManager;
+
 public class GameSettings {
     private SharedPreferences sharedPrefs;
 
@@ -33,5 +35,30 @@ public class GameSettings {
      */
     public double getCWUnitSize(){
         return 1.2/getWPM();
+    }
+
+
+    /**
+     * Get whether to play static from settings
+     *
+     * @return boolean of whether static should play
+     */
+    public boolean getStatic() {
+        return sharedPrefs.getBoolean("switch_preference_1", true);
+    }
+
+    /**
+     * Get the call sign from the settings
+     *
+     * @return the call sign
+     */
+    public String getUsersCallSign(){
+        return sharedPrefs.getString("signature",CallSignLibrary.getRandomCallsign());
+    }
+
+
+    //This method is used to get the time input from the settings
+    public String getTimePreferences(){
+        return sharedPrefs.getString("edit_text_preference_2", "5");
     }
 }

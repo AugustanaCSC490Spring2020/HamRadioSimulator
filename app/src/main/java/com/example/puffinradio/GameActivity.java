@@ -120,16 +120,11 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-    //This method is used to get the time input from the settings
-    private String getTimePreferences(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("edit_text_preference_2", "5");
-    }
 
 
     //This method is used to start the timer
     private void timer(){
-       int minTime  = Integer.parseInt(getTimePreferences()); // changes string input into an int
+       int minTime  = Integer.parseInt(gameSettings.getTimePreferences()); // changes string input into an int
        time = TimeUnit.MINUTES.toMillis(minTime) + 1000; // Since time input is is in min, this changes it into miliseconds
         countDownTimer = new CountDownTimer(time, 1000) {
             @Override
@@ -163,35 +158,6 @@ public class GameActivity extends AppCompatActivity {
         timeTextView.setText(timeLeftFormatted);
     }
 
-    /**
-     * Get the call sign from the settings
-     *
-     * @return the call sign
-     */
-    private String getUsersCallSign(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("signature",CallSignLibrary.getRandomCallsign());
-    }
-
-
-    private int getFrequency() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        String frequen = sharedPreferences.getString("frequency", "200");
-        int freq = Integer.parseInt(frequen);
-        return freq;
-    }
-
-
-
-    /**
-     * Get whether to play static from settings
-     *
-     * @return boolean of whether static should play
-     */
-    private boolean getStatic() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getBoolean("switch_preference_1", true);
-    }
 
     /**
      * Starts game when start game button is pressed
@@ -199,11 +165,11 @@ public class GameActivity extends AppCompatActivity {
      * @param v the button
      */
     public void startGame(View v) {
-        if(getStatic()) {
+        if(gameSettings.getStatic()) {
             soundPool.play(staticSound, 1, 1, 0, -1, 1);
         }
         timer();
-        frq = getFrequency();
+        frq = gameSettings.getFrequency();
         guessEditText.setEnabled(true);
         v.setVisibility(View.INVISIBLE);
         callsign = CallSignLibrary.getRandomCallsign();
