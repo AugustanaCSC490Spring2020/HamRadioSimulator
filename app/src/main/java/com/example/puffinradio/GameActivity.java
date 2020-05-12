@@ -1,5 +1,6 @@
 package com.example.puffinradio;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,17 +20,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
@@ -39,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
     private EditText guessEditText;
     private CountDownTimer countDownTimer;
     private Button startGameButton;
-
+    private DatabaseReference reference;
     SharedPreferences sharedPreferences;
     private long time;
     String callsign = "";
@@ -50,14 +47,19 @@ public class GameActivity extends AppCompatActivity {
     boolean donePlaying = false;
     static Handler handler = new Handler();
     int frq = 200;
+    String difficulty;
+    int highScore = 0;
 
     double transmissionSpeed;
+    boolean competitive;
+
     private GameSettings gameSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         timeTextView = findViewById(R.id.timeTextView);
+        competitive = SettingsActivity.getMode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -92,9 +94,8 @@ public class GameActivity extends AppCompatActivity {
         transmissionSpeed = gameSettings.getCWUnitSize();
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
-
+        difficulty = SettingsActivity.getText();
     }
-    
     @Override
     protected void onResume() {
         super.onResume();
@@ -137,6 +138,7 @@ public class GameActivity extends AppCompatActivity {
                     Intent intent = new Intent(GameActivity.this, EndActivity.class);
                     intent.putExtra("score", scoreNumTextView.getText().toString());
                     startActivity(intent); // when the timer is done it goes to the end activity
+                    sendScore();
                     countDownTimer.cancel();
             }
         }.start();
@@ -248,6 +250,32 @@ public class GameActivity extends AppCompatActivity {
         }, length);
     }
 
+    /**  This sets the highest score of the user based on what difficulty was chosen.
+     *
+     */
+    private void sendScore(){
+        if(competitive) {
+            reference = FirebaseDatabase.getInstance().getReference().child(difficulty).child(gameSettings.getUsersCallSign());
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString());
+                    if (dataSnapshot.exists()) {
+                        highScore = Integer.parseInt(dataSnapshot.getValue().toString());
+                    }
+                    if (userScore >= highScore) {
+                        highScore = userScore;
+                        dataSnapshot.getRef().setValue(highScore);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 }
 
