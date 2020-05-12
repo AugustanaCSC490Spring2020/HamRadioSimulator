@@ -52,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
 
     double transmissionSpeed;
     boolean competitive;
+    int overallSpeed;
 
     private GameSettings gameSettings;
     @Override
@@ -92,6 +93,7 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton.setEnabled(false);
 
         transmissionSpeed = gameSettings.getCWUnitSize();
+        overallSpeed = gameSettings.getOverallSpeed();
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
         difficulty = SettingsActivity.getText();
@@ -182,7 +184,7 @@ public class GameActivity extends AppCompatActivity {
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
         Log.d("FREQ", "startGame: freq is " + frq);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
         final double speed = transmissionSpeed;
 
         enableReplayButton(length);
@@ -206,7 +208,7 @@ public class GameActivity extends AppCompatActivity {
                     Log.d("CW: ", "onClick: " + cw);
                     donePlaying = false;
                     replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq);
+                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM());
 
                     enableReplayButton(length);
 
@@ -230,7 +232,7 @@ public class GameActivity extends AppCompatActivity {
 
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
 
         enableReplayButton(length);
     }
