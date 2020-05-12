@@ -1,9 +1,12 @@
 package com.example.puffinradio;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -20,20 +23,17 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
@@ -41,10 +41,9 @@ public class GameActivity extends AppCompatActivity {
     private TextView timeTextView;
     private TextView scoreNumTextView;
     private EditText guessEditText;
-    private List<String> callSignList = new ArrayList<String>();
     private CountDownTimer countDownTimer;
     private Button startGameButton;
-
+    private DatabaseReference reference;
     SharedPreferences sharedPreferences;
     private long time;
     String callsign = "";
@@ -54,14 +53,22 @@ public class GameActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     boolean donePlaying = false;
     static Handler handler = new Handler();
-    int frq = 200;
-    double transmissionSpeed;
+    int frq;
+    double WPM;
+    String difficulty;
+    int highScore = 0;
 
+    double transmissionSpeed;
+    boolean competitive;
+    int overallSpeed;
+
+    private GameSettings gameSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         timeTextView = findViewById(R.id.timeTextView);
+        competitive = SettingsActivity.getMode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -76,7 +83,7 @@ public class GameActivity extends AppCompatActivity {
         } else {
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         }
-
+        gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
         staticSound = soundPool.load(this, R.raw.staticsound, 1);
 
         guessEditText = findViewById(R.id.guessEditText);
@@ -93,14 +100,14 @@ public class GameActivity extends AppCompatActivity {
         replayCallSignButton = findViewById(R.id.replayCallSignButton);
         replayCallSignButton.setEnabled(false);
 
-        fileToList();
-
-        String WPM = getC();
-        transmissionSpeed = findCWUnitSize(WPM);
+        transmissionSpeed = gameSettings.getCWUnitSize();
+        overallSpeed = gameSettings.getOverallSpeed();
+        frq = gameSettings.getFrequency();
+        MorseCreator.setFreqOfTone(frq);
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
+        difficulty = SettingsActivity.getText();
     }
-    
     @Override
     protected void onResume() {
         super.onResume();
@@ -124,46 +131,13 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Get the call sign file from Firebase and add all call signs to a list
-     */
-    private void fileToList(){
-        String fileName = getFilesDir().getPath() + "/" + "callsigns.txt";
-        File file = new File(fileName);
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            DataInputStream inputStream = new DataInputStream(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String strLine;
-            while ((strLine = bufferedReader.readLine()) != null) {
-                callSignList.add(strLine);
-            }
-            inputStream.close();
-        } catch (Exception e) {
-            Toast.makeText(GameActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-        }
-    }
 
-    //This method is used to get the time input from the settings
-    private String getTimePreferences(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("edit_text_preference_2", "5");
-    }
 
-    /**
-     * Get a random call sign to be played
-     *
-     * @return the call sign
-     */
-    private String getRandomCallsign() {
-        Random rand = new Random();
-        return callSignList.get(rand.nextInt(callSignList.size()));
-    }
 
     //This method is used to start the timer
     private void timer(){
-       int minTime  = Integer.parseInt(getTimePreferences()); // changes string input into an int
+       int minTime  = Integer.parseInt(gameSettings.getTimePreferences()); // changes string input into an int
        time = TimeUnit.MINUTES.toMillis(minTime) + 1000; // Since time input is is in min, this changes it into miliseconds
         countDownTimer = new CountDownTimer(time, 1000) {
             @Override
@@ -174,8 +148,10 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                     Intent intent = new Intent(GameActivity.this, EndActivity.class);
-                    intent.putExtra("score", scoreNumTextView.getText().toString());
+                    intent.putExtra("score", Integer.parseInt(scoreNumTextView.getText().toString()) * (int) WPM);
+                Log.d("spd", "onFinish: " + Integer.parseInt(scoreNumTextView.getText().toString()) * WPM + " " + WPM);
                     startActivity(intent); // when the timer is done it goes to the end activity
+                    sendScore();
                     countDownTimer.cancel();
             }
         }.start();
@@ -197,52 +173,6 @@ public class GameActivity extends AppCompatActivity {
         timeTextView.setText(timeLeftFormatted);
     }
 
-    /**
-     * Get the call sign from the settings
-     *
-     * @return the call sign
-     */
-    private String getUsersCallSign(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("signature",getRandomCallsign());
-    }
-
-    /**
-     * Get the speed to play the call signs
-     *
-     * @return the speed
-     */
-    private String getC() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getString("WPM", "20");
-    }
-
-    private int getFrequency() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        String frequen = sharedPreferences.getString("frequency", "200");
-        int freq = Integer.parseInt(frequen);
-        return freq;
-    }
-
-    /**
-     * Calculate the speed of one unit
-     *
-     * @param C the speed in WPM
-     * @return the size of one unit
-     */
-    private double findCWUnitSize(String C){
-        return 1.2/Integer.parseInt(C);
-    }
-
-    /**
-     * Get whether to play static from settings
-     *
-     * @return boolean of whether static should play
-     */
-    private boolean getStatic() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
-        return sharedPreferences.getBoolean("switch_preference_1", true);
-    }
 
     /**
      * Starts game when start game button is pressed
@@ -250,22 +180,25 @@ public class GameActivity extends AppCompatActivity {
      * @param v the button
      */
     public void startGame(View v) {
-        if(getStatic()) {
+        if(gameSettings.getStatic()) {
             soundPool.play(staticSound, 1, 1, 0, -1, 1);
         }
         timer();
-        frq = getFrequency();
+        InputMethodManager inputMethodManager =
+                (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
         guessEditText.setEnabled(true);
+        guessEditText.requestFocus();
         v.setVisibility(View.INVISIBLE);
-        callsign = getRandomCallsign();
+        callsign = CallSignLibrary.getRandomCallsign();
         String cw = MorseCreator.createMorse(callsign);
         Log.d("CW: ", "onClick: " + cw);
-        String WPM = getC();
-        double transmissionSpeed = findCWUnitSize(WPM);
+        WPM = gameSettings.getWPM();
+        double transmissionSpeed = gameSettings.getCWUnitSize();
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
         Log.d("FREQ", "startGame: freq is " + frq);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
         final double speed = transmissionSpeed;
 
         enableReplayButton(length);
@@ -284,12 +217,12 @@ public class GameActivity extends AppCompatActivity {
                         scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
                     }
                     guessEditText.setText("");
-                    callsign = getRandomCallsign();
+                    callsign = CallSignLibrary.getRandomCallsign();
                     String cw = MorseCreator.createMorse(callsign); //test
                     Log.d("CW: ", "onClick: " + cw);
                     donePlaying = false;
                     replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq);
+                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM());
 
                     enableReplayButton(length);
 
@@ -313,7 +246,7 @@ public class GameActivity extends AppCompatActivity {
 
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq);
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
 
         enableReplayButton(length);
     }
@@ -333,6 +266,32 @@ public class GameActivity extends AppCompatActivity {
         }, length);
     }
 
+    /**  This sets the highest score of the user based on what difficulty was chosen.
+     *
+     */
+    private void sendScore(){
+        if(competitive) {
+            reference = FirebaseDatabase.getInstance().getReference().child(difficulty).child(gameSettings.getUsersCallSign());
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString());
+                    if (dataSnapshot.exists()) {
+                        highScore = Integer.parseInt(dataSnapshot.getValue().toString());
+                    }
+                    if (userScore >= highScore) {
+                        highScore = userScore;
+                        dataSnapshot.getRef().setValue(highScore);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 }
 

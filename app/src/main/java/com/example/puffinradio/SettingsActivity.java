@@ -9,15 +9,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.text.InputType;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 public class SettingsActivity extends AppCompatActivity {
-    boolean competitive;
+    private static String diff;
+    static boolean competitive;
 
+    private GameSettings gameSettings ;
     /**
      * This creates the activity and creates the settings
      * @param savedInstanceState returns the last thing the user inputs
@@ -46,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
             difficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 public void onItemSelected(AdapterView<?> parent, View view,
                                            int pos, long id) {
+                    diff = parent.getItemAtPosition(pos).toString();
                     parent.getItemAtPosition(pos);
                 }
 
@@ -57,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
             difficulty.setVisibility(View.GONE);
             diffTextView.setVisibility(View.GONE);
         }
-
+        gameSettings = new GameSettings(PreferenceManager.getDefaultSharedPreferences(this));
     }
 
 
@@ -93,10 +96,6 @@ public class SettingsActivity extends AppCompatActivity {
             });
         }
 
-
-
-
-
     }
 
     /**
@@ -105,5 +104,11 @@ public class SettingsActivity extends AppCompatActivity {
      */
     public void openGameActivity(View view){
         startActivity(new Intent(SettingsActivity.this, GameActivity.class));
+    }
+    public static String getText(){
+        return diff;
+    }
+    public static boolean getMode(){
+        return competitive;
     }
 }

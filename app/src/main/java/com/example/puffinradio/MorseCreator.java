@@ -21,21 +21,17 @@ public class MorseCreator {
 
     static Handler handler = new Handler();
 
-    static SoundPool soundPool;
-    static int dot, dash;
-    static int wpm;
-
     static final int sampleRate = 8000;
-    private static int freqOfTone = 400; // hz
-
-    static double  unit;
-    static double  c;//wpm
-    double soundLength;
+    private static int freqOfTone; // hz
 
     private static byte[] generatedDit;
     private static byte[] generatedDah;
-    private static byte[] rest;
 
+    private static boolean hasFarnsworth = false;
+    private static double tA;
+    private static double tC;
+    private static double tW;
+    private static int s;//overall speed
 
     public static String createMorse(String callSign) {
         Log.d(TAG, "createMorse: HERE");
@@ -54,27 +50,37 @@ public class MorseCreator {
         return morse;
     }
 
-    public static int playSound(String morse, final double unitLength, double transSpeed, int freq) {
-        int timer = 0;
+    public static int playSound(String morse, final double unitLength, double transSpeed, int freq, int overallSpeed, int wpm) {
 
         freqOfTone = freq;
         if(transSpeed > 60)
             transSpeed = 60;
-        if(transSpeed < 2)
-            transSpeed = 2;
+        if(transSpeed <= 18) {
+            transSpeed = 18;
+            hasFarnsworth = true;
+        }
+        tA = findtA(overallSpeed, wpm);
+        tC = 3*tA / 19;
+        tW = 7*tA / 19;
+
 
         int numUnits = 0;
         int indices = 1000;
         for(int i = 0; i < morse.length(); i++) {
             if(morse.charAt(i) == '-') {
                 indices += generatedDah.length;
-                indices += rest.length;
                 numUnits += 4;
             } else {
                 indices += generatedDit.length;
-                indices += rest.length;
                 numUnits += 2;
             }
+            if(hasFarnsworth) {
+                byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
+                indices += charSpace.length;
+            } else {
+                indices += generatedDit.length;
+            }
+
         }
         byte[] morseSound = new byte[indices];
         int morseInd = 1000;
@@ -86,11 +92,9 @@ public class MorseCreator {
                 System.arraycopy(generatedDit, 0, morseSound, morseInd, generatedDit.length);
                 morseInd += generatedDit.length;
             } else {
-                System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
-                morseInd += rest.length;
+                morseInd += generatedDit.length;
             }
-            System.arraycopy(rest, 0, morseSound, morseInd, rest.length);
-            morseInd += rest.length;
+            morseInd += generatedDit.length;
         }
 
         playMorse(sampleRate, morseSound, (int) unitLength * numUnits);
@@ -136,7 +140,7 @@ public class MorseCreator {
 
 
         // fill out the array
-        for (int i = 0; i < numSamples; ++i) {
+        for (int i = 0; i < numSamples-1; ++i) {
             sample[i] = Math.sin(2 * Math.PI * i / (sampleRate/freqOfTone));
         }
 
@@ -152,9 +156,6 @@ public class MorseCreator {
             generatedDit[idx++] = (byte) ((val & 0xff00) >>> 8);
 
         }
-
-        rest = new byte[generatedDit.length];
-
     }
 
     static void playMorse(int sampleRate, byte[] generatedSnd, int length){
@@ -175,12 +176,11 @@ public class MorseCreator {
 
     }
 
-    public static void rest(int length) {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //
-            }
-        }, length);
+    private static double findtA(int overAll, int charSpeed){
+        return ((60.0*charSpeed - 37.2*overAll) / (overAll * charSpeed));
+    }
+
+    public static void setFreqOfTone(int frq) {
+        freqOfTone = frq;
     }
 }
