@@ -37,7 +37,14 @@
             android:singleLine="true"
             android:title="@string/freq_edit"
             app:useSimpleSummaryProvider="true"/>
-
+        <EditTextPreference
+            android:defaultValue="5"
+            android:key="overall_speed"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Farnsworth Speed"
+            app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
+
 
 </PreferenceScreen>

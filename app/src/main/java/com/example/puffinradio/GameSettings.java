@@ -61,4 +61,8 @@ public class GameSettings {
     public String getTimePreferences(){
         return sharedPrefs.getString("edit_text_preference_2", "5");
     }
+
+    public int getOverallSpeed() {
+        return Integer.parseInt(sharedPrefs.getString("overall_speed", "5"));
+    }
 }
