@@ -17,7 +17,7 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
 
         scoreView = findViewById(R.id.scoreTextView);
-        String score = this.getIntent().getStringExtra("score");
+        String score = this.getIntent().getIntExtra("score", 0) + "";
         scoreView.setText(score);
     }
 

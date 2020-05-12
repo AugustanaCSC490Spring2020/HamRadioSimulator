@@ -21,7 +21,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:windowSoftInputMode="adjustResize"
+        <activity android:windowSoftInputMode="adjustResize|stateAlwaysVisible"
                   android:name=".GameActivity"
             android:parentActivityName=".SettingsActivity"
             android:screenOrientation="portrait">
@@ -30,7 +30,8 @@
                 android:value=".GameActivity" />
         </activity>
 
-        <activity android:name=".EndActivity" />
+        <activity android:name=".EndActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".LeaderboardActivity"
             android:parentActivityName=".MainActivity" >

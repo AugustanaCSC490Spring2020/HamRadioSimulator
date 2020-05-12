@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -16,6 +18,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
     boolean donePlaying = false;
     static Handler handler = new Handler();
     int frq = 200;
+    double WPM;
 
     double transmissionSpeed;
     private GameSettings gameSettings;
@@ -135,7 +139,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                     Intent intent = new Intent(GameActivity.this, EndActivity.class);
-                    intent.putExtra("score", scoreNumTextView.getText().toString());
+                    intent.putExtra("score", Integer.parseInt(scoreNumTextView.getText().toString()) * (int) WPM);
+                Log.d("spd", "onFinish: " + Integer.parseInt(scoreNumTextView.getText().toString()) * WPM + " " + WPM);
                     startActivity(intent); // when the timer is done it goes to the end activity
                     countDownTimer.cancel();
             }
@@ -169,13 +174,17 @@ public class GameActivity extends AppCompatActivity {
             soundPool.play(staticSound, 1, 1, 0, -1, 1);
         }
         timer();
+        InputMethodManager inputMethodManager =
+                (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
         frq = gameSettings.getFrequency();
         guessEditText.setEnabled(true);
+        guessEditText.requestFocus();
         v.setVisibility(View.INVISIBLE);
         callsign = CallSignLibrary.getRandomCallsign();
         String cw = MorseCreator.createMorse(callsign);
         Log.d("CW: ", "onClick: " + cw);
-        double WPM = gameSettings.getWPM();
+        WPM = gameSettings.getWPM();
         double transmissionSpeed = gameSettings.getCWUnitSize();
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
