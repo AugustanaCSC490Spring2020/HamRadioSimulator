@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -13,6 +14,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -46,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
     String callsign = "";
     SoundPool soundPool;
     int staticSound;
-    LinkedHashMap<String, Boolean> guesses;
+    LinkedHashMap<String, String> guesses;
     RecyclerView recyclerView;
     boolean donePlaying = false;
     static Handler handler = new Handler();
@@ -272,12 +276,12 @@ public class GameActivity extends AppCompatActivity {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (donePlaying && keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
                         i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
-                    if (guessEditText.getText().toString().equalsIgnoreCase(callsign)) {
+                    String userGuess = guessEditText.getText().toString();
+                    guesses.put(callsign, userGuess);
+
+                    if (userGuess.equalsIgnoreCase(callsign)) {
                         Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
                         scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
-                        guesses.put(callsign, true);
-                    } else {
-                        guesses.put(callsign, false);
                     }
                     guessEditText.setText("");
                     callsign = getRandomCallsign();

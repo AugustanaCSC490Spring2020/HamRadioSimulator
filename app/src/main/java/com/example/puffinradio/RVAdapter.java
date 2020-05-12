@@ -1,5 +1,9 @@
 package com.example.puffinradio;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
 
-    LinkedHashMap<String, Boolean> guesses;
+    LinkedHashMap<String, String> guesses;
 
-    RVAdapter(LinkedHashMap<String, Boolean> guesses){
+    RVAdapter(LinkedHashMap<String, String> guesses){
         this.guesses = guesses;
     }
 
@@ -33,12 +37,31 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
     @Override
     public void onBindViewHolder(GuessViewHolder guessViewHolder, int i) {
         String callSign = guesses.keySet().toArray()[i].toString();
-        guessViewHolder.guess.setText(callSign);
+        String userGuess = guesses.get(callSign);
+
         String correct;
-        if(guesses.get(callSign)) {
+        if(userGuess.equalsIgnoreCase(callSign)) {
             correct = "Y";
+            guessViewHolder.guess.setText(callSign);
         } else {
             correct = "N";
+            SpannableString ss = new SpannableString(callSign);
+            ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
+            if(userGuess.length() == callSign.length() || userGuess.length() > callSign.length()){
+                for(int j = 0; j < callSign.length();j++){
+                    if(callSign.charAt(j) != userGuess.charAt(j)){
+                        ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                }
+            } else {
+                for(int j = 0; j < userGuess.length();j++){
+                    if(callSign.charAt(j) != userGuess.charAt(j)){
+                        ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                }
+                ss.setSpan(redColor, userGuess.length(), callSign.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            guessViewHolder.guess.setText(ss);
         }
         guessViewHolder.correct.setText(correct);
     }
@@ -60,5 +83,4 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
             correct = (TextView)itemView.findViewById(R.id.correct);
         }
     }
-
 }
