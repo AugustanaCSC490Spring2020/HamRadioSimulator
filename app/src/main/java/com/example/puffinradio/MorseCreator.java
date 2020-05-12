@@ -22,7 +22,7 @@ public class MorseCreator {
     static Handler handler = new Handler();
 
     static final int sampleRate = 8000;
-    private static int freqOfTone = 400; // hz
+    private static int freqOfTone; // hz
 
     private static byte[] generatedDit;
     private static byte[] generatedDah;
@@ -178,5 +178,9 @@ public class MorseCreator {
 
     private static double findtA(int overAll, int charSpeed){
         return ((60.0*charSpeed - 37.2*overAll) / (overAll * charSpeed));
+    }
+
+    public static void setFreqOfTone(int frq) {
+        freqOfTone = frq;
     }
 }

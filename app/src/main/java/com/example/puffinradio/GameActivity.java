@@ -49,7 +49,7 @@ public class GameActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     boolean donePlaying = false;
     static Handler handler = new Handler();
-    int frq = 200;
+    int frq;
     double WPM;
     String difficulty;
     int highScore = 0;
@@ -98,6 +98,8 @@ public class GameActivity extends AppCompatActivity {
 
         transmissionSpeed = gameSettings.getCWUnitSize();
         overallSpeed = gameSettings.getOverallSpeed();
+        frq = gameSettings.getFrequency();
+        MorseCreator.setFreqOfTone(frq);
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
         difficulty = SettingsActivity.getText();
@@ -181,7 +183,6 @@ public class GameActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager =
                 (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-        frq = gameSettings.getFrequency();
         guessEditText.setEnabled(true);
         guessEditText.requestFocus();
         v.setVisibility(View.INVISIBLE);
