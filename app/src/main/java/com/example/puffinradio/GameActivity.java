@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
     double transmissionSpeed;
     boolean competitive;
     int overallSpeed;
+
 
     private GameSettings gameSettings;
     @Override
@@ -137,22 +137,22 @@ public class GameActivity extends AppCompatActivity {
 
     //This method is used to start the timer
     private void timer(){
-       int minTime  = Integer.parseInt(gameSettings.getTimePreferences()); // changes string input into an int
-       time = TimeUnit.MINUTES.toMillis(minTime) + 1000; // Since time input is is in min, this changes it into miliseconds
+        int minTime  = Integer.parseInt(gameSettings.getTimePreferences()); // changes string input into an int
+        time = TimeUnit.MINUTES.toMillis(minTime) + 1000; // Since time input is is in min, this changes it into miliseconds
         countDownTimer = new CountDownTimer(time, 1000) {
             @Override
             public void onTick(long millisUntilFinished ) {
-               time = millisUntilFinished;
+                time = millisUntilFinished;
                 updateCountDownText();
             }
             @Override
             public void onFinish() {
-                    Intent intent = new Intent(GameActivity.this, EndActivity.class);
-                    intent.putExtra("score", Integer.parseInt(scoreNumTextView.getText().toString()) * (int) WPM);
+                Intent intent = new Intent(GameActivity.this, EndActivity.class);
+                intent.putExtra("score", Integer.parseInt(scoreNumTextView.getText().toString()) * (int) WPM);
                 Log.d("spd", "onFinish: " + Integer.parseInt(scoreNumTextView.getText().toString()) * WPM + " " + WPM);
-                    startActivity(intent); // when the timer is done it goes to the end activity
-                    sendScore();
-                    countDownTimer.cancel();
+                startActivity(intent); // when the timer is done it goes to the end activity
+                sendScore();
+                countDownTimer.cancel();
             }
         }.start();
     }
@@ -275,7 +275,7 @@ public class GameActivity extends AppCompatActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString());
+                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
                     if (dataSnapshot.exists()) {
                         highScore = Integer.parseInt(dataSnapshot.getValue().toString());
                     }
@@ -294,5 +294,3 @@ public class GameActivity extends AppCompatActivity {
     }
 
 }
-
-

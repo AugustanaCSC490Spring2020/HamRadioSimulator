@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LeaderboardActivity extends AppCompatActivity{
-    String difficulty = "Easy";
+   private String difficulty = "Easy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

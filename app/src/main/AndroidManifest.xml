@@ -24,7 +24,7 @@
         <activity android:windowSoftInputMode="adjustResize|stateAlwaysVisible"
                   android:name=".GameActivity"
             android:parentActivityName=".SettingsActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GameActivity" />

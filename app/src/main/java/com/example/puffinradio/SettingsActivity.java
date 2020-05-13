@@ -17,7 +17,7 @@ import androidx.preference.PreferenceManager;
 
 public class SettingsActivity extends AppCompatActivity {
     private static String diff;
-    static boolean competitive;
+    private static boolean competitive;
 
     private GameSettings gameSettings ;
     /**
