@@ -50,15 +50,20 @@ public class MorseCreator {
         return morse;
     }
 
-    public static int playSound(String morse, final double unitLength, double transSpeed, int freq, int overallSpeed, int wpm) {
+    public static int playSound(String morse, final double unitLength, double transSpeed, int freq, int overallSpeed, int wpm,boolean farnsWorth) {
 
         freqOfTone = freq;
         if(transSpeed > 60)
             transSpeed = 60;
-        if(transSpeed <= 18) {
-            transSpeed = 18;
-            hasFarnsworth = true;
+        if(transSpeed < 5) {
+            transSpeed = 5;
         }
+        if(farnsWorth && (transSpeed <= 18)) {
+            farnsWorth = true;
+        } else if(farnsWorth && transSpeed > 18){
+            farnsWorth = false;
+        }
+        hasFarnsworth = farnsWorth;
         tA = findtA(overallSpeed, wpm);
         tC = 3*tA / 19;
         tW = 7*tA / 19;

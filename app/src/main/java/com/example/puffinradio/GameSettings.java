@@ -65,4 +65,8 @@ public class GameSettings {
     public int getOverallSpeed() {
         return Integer.parseInt(sharedPrefs.getString("overall_speed", "5"));
     }
+
+    public boolean getFarnsworth() {
+        return sharedPrefs.getBoolean("hasFarnsworth", false);
+    }
 }

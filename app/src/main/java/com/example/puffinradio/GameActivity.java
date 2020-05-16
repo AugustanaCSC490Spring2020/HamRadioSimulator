@@ -198,7 +198,7 @@ public class GameActivity extends AppCompatActivity {
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
         Log.d("FREQ", "startGame: freq is " + frq);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM(), gameSettings.getFarnsworth());
         final double speed = transmissionSpeed;
 
         enableReplayButton(length);
@@ -222,7 +222,7 @@ public class GameActivity extends AppCompatActivity {
                     Log.d("CW: ", "onClick: " + cw);
                     donePlaying = false;
                     replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM());
+                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM(), gameSettings.getFarnsworth());
 
                     enableReplayButton(length);
 
@@ -246,7 +246,7 @@ public class GameActivity extends AppCompatActivity {
 
         donePlaying = false;
         replayCallSignButton.setEnabled(false);
-        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM());
+        int length = MorseCreator.playSound(cw, transmissionSpeed * 1000, transmissionSpeed, frq,overallSpeed,gameSettings.getWPM(), gameSettings.getFarnsworth());
 
         enableReplayButton(length);
     }
