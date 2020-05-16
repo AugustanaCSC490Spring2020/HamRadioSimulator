@@ -22,6 +22,8 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -201,31 +203,31 @@ public class GameActivity extends AppCompatActivity {
 
         enableReplayButton(length);
 
-        //sets up the guess edit text to play new call sign once user presses enter
-        guessEditText.setOnKeyListener(new View.OnKeyListener() {
+        guessEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (donePlaying && keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
-                        i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
-                    String userGuess = guessEditText.getText().toString();
-                    guesses.put(callsign, userGuess);
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_DONE) {
+                    if(donePlaying && !callsign.equals("")) {
+                        String userGuess = guessEditText.getText().toString();
+                        guesses.put(callsign, userGuess);
 
-                    if (userGuess.equalsIgnoreCase(callsign)) {
-                        Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
-                        scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                        if (userGuess.equalsIgnoreCase(callsign)) {
+                            Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
+                            scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                        }
+                        guessEditText.setText("");
+                        callsign = CallSignLibrary.getRandomCallsign();
+                        String cw = MorseCreator.createMorse(callsign); //test
+                        Log.d("CW: ", "onClick: " + cw);
+                        donePlaying = false;
+                        replayCallSignButton.setEnabled(false);
+                        int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM());
+
+                        enableReplayButton(length);
+
+                        RVAdapter adapter = new RVAdapter(guesses);
+                        recyclerView.setAdapter(adapter);
                     }
-                    guessEditText.setText("");
-                    callsign = CallSignLibrary.getRandomCallsign();
-                    String cw = MorseCreator.createMorse(callsign); //test
-                    Log.d("CW: ", "onClick: " + cw);
-                    donePlaying = false;
-                    replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM());
-
-                    enableReplayButton(length);
-
-                    RVAdapter adapter = new RVAdapter(guesses);
-                    recyclerView.setAdapter(adapter);
                     return true;
                 }
                 return false;
