@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,28 +38,37 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
     @Override
     public void onBindViewHolder(GuessViewHolder guessViewHolder, int i) {
         String callSign = guesses.keySet().toArray()[i].toString();
-        String userGuess = guesses.get(callSign);
+        String userGuess = guesses.get(callSign).toUpperCase();
 
         String correct;
+
+        Log.d("createMorse", "guess: " + userGuess);
+        Log.d("createMorse", "callsign: " + callSign);
         if(userGuess.equalsIgnoreCase(callSign)) {
             correct = "Y";
             guessViewHolder.guess.setText(callSign);
         } else {
             correct = "N";
             SpannableString ss = new SpannableString(callSign);
-            ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
             if(userGuess.length() == callSign.length() || userGuess.length() > callSign.length()){
-                for(int j = 0; j < callSign.length();j++){
+                for(int j = 0; j < callSign.length(); j++){
                     if(callSign.charAt(j) != userGuess.charAt(j)){
+                        ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
+                        Log.d("createMorse", "userChar: " + userGuess.charAt(j));
+                        Log.d("createMorse", "callsignChar: " + callSign.charAt(j));
                         ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
                 }
             } else {
                 for(int j = 0; j < userGuess.length();j++){
                     if(callSign.charAt(j) != userGuess.charAt(j)){
+                        ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
+                        Log.d("createMorse", "userChar: " + userGuess.charAt(j));
+                        Log.d("createMorse", "callsignChar: " + callSign.charAt(j));
                         ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
                 }
+                ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
                 ss.setSpan(redColor, userGuess.length(), callSign.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             guessViewHolder.guess.setText(ss);
