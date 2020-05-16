@@ -68,7 +68,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         timeTextView = findViewById(R.id.timeTextView);
-        competitive = SettingsActivity.getMode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -106,7 +105,6 @@ public class GameActivity extends AppCompatActivity {
         MorseCreator.setFreqOfTone(frq);
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
-        difficulty = SettingsActivity.getText();
     }
     @Override
     protected void onResume() {

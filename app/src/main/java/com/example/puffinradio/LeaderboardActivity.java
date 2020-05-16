@@ -36,7 +36,6 @@ public class LeaderboardActivity extends AppCompatActivity{
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        difficulty = SettingsActivity.getText();
      if (difficulty == null) {
             difficulty = "Easy";
         }
