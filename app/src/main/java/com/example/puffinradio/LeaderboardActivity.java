@@ -12,15 +12,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Iterator;
 
 public class LeaderboardActivity extends AppCompatActivity{
-   private String difficulty = "Easy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +31,8 @@ public class LeaderboardActivity extends AppCompatActivity{
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-     if (difficulty == null) {
-            difficulty = "Easy";
-        }
-        final DatabaseReference myRef = database.getReference().child(difficulty);
+
+        final DatabaseReference myRef = database.getReference();
         final HashMap<String, Integer> callSignScores = new HashMap<String, Integer>();
 
         final TextView[] callSigns = new TextView[10];
@@ -69,34 +62,37 @@ public class LeaderboardActivity extends AppCompatActivity{
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int counter = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    callSignScores.put(snapshot.getKey().toUpperCase(), Integer.parseInt(snapshot.getValue().toString()));
-                }
-                Set<Map.Entry<String, Integer>> entries = callSignScores.entrySet();
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
 
-                Comparator<Map.Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String, Integer>>() {
-                    @Override
-                    public int compare(Map.Entry<String, Integer> valOne, Map.Entry<String, Integer> valTwo) {
-                        Integer scoreOne = valOne.getValue();
-                        Integer scoreTwo = valTwo.getValue();
-                        return scoreTwo.compareTo(scoreOne);
-                    }
-                };
-                List<Map.Entry<String, Integer>> listOfEntries = new ArrayList<Map.Entry<String, Integer>>(entries);
-                Collections.sort(listOfEntries, valueComparator);
-                LinkedHashMap<String, Integer> sortedByValue = new LinkedHashMap<String, Integer>(listOfEntries.size());
-                for (Map.Entry<String, Integer> entry : listOfEntries) {
-                    sortedByValue.put(entry.getKey(), entry.getValue());
-                }
-                Set<Map.Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
-                for (Map.Entry<String, Integer> mapping : entrySetSortedByValue) {
-                    if (counter <= 9) {
-                        callSigns[counter].setText(mapping.getKey().toUpperCase());
-                        scores[counter].setText(mapping.getValue().toString());
-                        counter++;
+                ArrayList<HighScore> scoreList = new ArrayList<>();
+
+                while (iterator.hasNext()) {
+                    DataSnapshot next = iterator.next();
+                    String key = next.getKey();
+                    Iterable<DataSnapshot> data = next.getChildren();
+
+                    //get all the children of both events and users, and then put them in their respective lists
+                    for(DataSnapshot item : data) {
+                        scoreList.add(new HighScore(key, item.getKey(), ((Long) item.getValue()).intValue()));
                     }
                 }
+
+                Collections.sort(scoreList);
+
+                if(scoreList.size() > 10) {
+                    for(int i = scoreList.size() - 1; i >= 10; i--) {
+                        HighScore score = scoreList.get(i);
+                        myRef.child(score.getKey()).removeValue();
+                        scoreList.remove(i);
+                    }
+                }
+
+                for(int i = 0; i < scoreList.size(); i++) {
+                    callSigns[i].setText(scoreList.get(i).getCallSign());
+                    scores[i].setText(scoreList.get(i).getScore() + "");
+                }
+
             }
 
             @Override

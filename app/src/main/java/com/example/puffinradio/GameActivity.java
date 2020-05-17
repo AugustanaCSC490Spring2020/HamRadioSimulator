@@ -56,11 +56,9 @@ public class GameActivity extends AppCompatActivity {
     static Handler handler = new Handler();
     int frq;
     double WPM;
-    String difficulty;
     int highScore = 0;
 
     double transmissionSpeed;
-    boolean competitive;
     int overallSpeed;
 
 
@@ -270,19 +268,13 @@ public class GameActivity extends AppCompatActivity {
      *
      */
     private void sendScore(){
-        if(competitive) {
-            reference = FirebaseDatabase.getInstance().getReference().child(difficulty).child(gameSettings.getUsersCallSign());
+
+            reference = FirebaseDatabase.getInstance().getReference().push().child(gameSettings.getUsersCallSign());
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
-                    if (dataSnapshot.exists()) {
-                        highScore = Integer.parseInt(dataSnapshot.getValue().toString());
-                    }
-                    if (userScore >= highScore) {
-                        highScore = userScore;
-                        dataSnapshot.getRef().setValue(highScore);
-                    }
+                    dataSnapshot.getRef().setValue(userScore);
                 }
 
                 @Override
@@ -290,7 +282,6 @@ public class GameActivity extends AppCompatActivity {
 
                 }
             });
-        }
     }
 
 }
