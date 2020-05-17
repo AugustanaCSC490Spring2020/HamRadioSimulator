@@ -53,8 +53,8 @@ public class MorseCreator {
     public static int playSound(String morse, final double unitLength, double transSpeed, int freq, int overallSpeed, int wpm) {
 
         freqOfTone = freq;
-        if(transSpeed > 60)
-            transSpeed = 60;
+        if(transSpeed > 40)
+            transSpeed = 40;
         if(transSpeed <= 18) {
             transSpeed = 18;
             hasFarnsworth = true;

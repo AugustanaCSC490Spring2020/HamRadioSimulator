@@ -56,13 +56,13 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
             final androidx.preference.EditTextPreference CWpref = getPreferenceManager().findPreference("WPM");
-            CWpref.setDialogMessage("Speed must be between 5-60 WPM");
+            CWpref.setDialogMessage("Speed must be between 5-40 WPM");
             CWpref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     String s = newValue.toString();
-                    if(Integer.parseInt(s) < 5 || Integer.parseInt(s) > 60) {
-                        Toast toast = Toast.makeText(getContext(), "Speed must be between 5-60 WPM", Toast.LENGTH_SHORT);
+                    if(Integer.parseInt(s) < 5 || Integer.parseInt(s) > 40) {
+                        Toast toast = Toast.makeText(getContext(), "Speed must be between 5-40 WPM", Toast.LENGTH_SHORT);
                         toast.show();
                         return false;
                     }
