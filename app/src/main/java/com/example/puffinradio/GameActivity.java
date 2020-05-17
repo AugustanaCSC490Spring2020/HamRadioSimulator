@@ -268,20 +268,9 @@ public class GameActivity extends AppCompatActivity {
      *
      */
     private void sendScore(){
-
             reference = FirebaseDatabase.getInstance().getReference().push().child(gameSettings.getUsersCallSign());
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
-                    dataSnapshot.getRef().setValue(userScore);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+            int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
+            reference.setValue(userScore);
     }
 
 }
