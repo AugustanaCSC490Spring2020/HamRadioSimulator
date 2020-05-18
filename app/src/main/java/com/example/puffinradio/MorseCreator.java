@@ -57,22 +57,9 @@ public class MorseCreator {
         freqOfTone = freq;
         if(transSpeed > 40)
             transSpeed = 40;
-        if(transSpeed <= 18) {
-            hasFarnsworth = true;
-        }
-        if(transSpeed <5)
+        if(transSpeed < 5) {
             transSpeed = 5;
-        if(farnsWorth && (transSpeed <= 18)) {
-            farnsWorth = true;
-        } else if(farnsWorth && transSpeed > 18){
-            farnsWorth = false;
         }
-        hasFarnsworth = farnsWorth;
-        tA = findtA(overallSpeed, wpm);
-        tC = 3*tA / 19;
-        tW = 7*tA / 19;
-        byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
-
         int numUnits = 0;
         int indices = 1000;
         for(int i = 0; i < morse.length(); i++) {
@@ -83,12 +70,7 @@ public class MorseCreator {
                 indices += generatedDit.length;
                 numUnits += 2;
             }
-            if(hasFarnsworth) {
-                indices += charSpace.length;
-            } else {
                 indices += generatedDit.length;
-            }
-
         }
         byte[] morseSound = new byte[indices];
         int morseInd = 1000;
@@ -100,11 +82,7 @@ public class MorseCreator {
                 System.arraycopy(generatedDit, 0, morseSound, morseInd, generatedDit.length);
                 morseInd += generatedDit.length;
             } else {
-                if(!hasFarnsworth) {
                     morseInd += generatedDit.length;
-                } else {
-                    morseInd +=charSpace.length;
-                }
             }
             morseInd += generatedDit.length;
         }
