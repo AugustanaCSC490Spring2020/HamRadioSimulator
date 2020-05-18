@@ -58,9 +58,10 @@ public class MorseCreator {
         if(transSpeed > 40)
             transSpeed = 40;
         if(transSpeed <= 18) {
-            transSpeed = 18;
             hasFarnsworth = true;
         }
+        if(transSpeed <5)
+            transSpeed = 5;
         if(farnsWorth && (transSpeed <= 18)) {
             farnsWorth = true;
         } else if(farnsWorth && transSpeed > 18){
