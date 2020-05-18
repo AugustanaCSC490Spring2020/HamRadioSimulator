@@ -118,7 +118,6 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         soundPool.autoPause();
         MorseCreator.handler.removeCallbacksAndMessages(null);
-        MorseCreator.audioTrack.release();
         if(countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -220,19 +219,6 @@ public class GameActivity extends AppCompatActivity {
                         RVAdapter adapter = new RVAdapter(guesses);
                         recyclerView.setAdapter(adapter);
                     }
-                    guessEditText.setText("");
-                    callsign = CallSignLibrary.getRandomCallsign();
-                    String cw = MorseCreator.createMorse(callsign); //test
-                    Log.d("CW: ", "onClick: " + cw);
-                    donePlaying = false;
-                    replayCallSignButton.setEnabled(false);
-                    int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM(), gameSettings.getFarnsworth());
-
-                    enableReplayButton(length);
-
-                    RVAdapter adapter = new RVAdapter(guesses);
-                    recyclerView.setAdapter(adapter);
-
                     return true;
                 }
                 return false;
