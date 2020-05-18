@@ -80,6 +80,7 @@ public class MorseCreator {
                 numUnits += 2;
             }
             if(hasFarnsworth) {
+
                 byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
                 indices += charSpace.length;
             } else {

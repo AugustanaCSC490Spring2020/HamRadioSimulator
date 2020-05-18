@@ -16,21 +16,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
+
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -54,11 +50,9 @@ public class GameActivity extends AppCompatActivity {
     static Handler handler = new Handler();
     int frq;
     double WPM;
-    String difficulty;
     int highScore = 0;
 
     double transmissionSpeed;
-    boolean competitive;
     int overallSpeed;
 
 
@@ -68,7 +62,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         timeTextView = findViewById(R.id.timeTextView);
-        competitive = SettingsActivity.getMode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -106,7 +99,6 @@ public class GameActivity extends AppCompatActivity {
         MorseCreator.setFreqOfTone(frq);
         MorseCreator.genDah(transmissionSpeed);
         MorseCreator.genDit(transmissionSpeed);
-        difficulty = SettingsActivity.getText();
     }
     @Override
     protected void onResume() {
@@ -203,18 +195,29 @@ public class GameActivity extends AppCompatActivity {
 
         enableReplayButton(length);
 
-        //sets up the guess edit text to play new call sign once user presses enter
-        guessEditText.setOnKeyListener(new View.OnKeyListener() {
+        guessEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (donePlaying && keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
-                        i == KeyEvent.KEYCODE_ENTER && !callsign.equals("")) {
-                    String userGuess = guessEditText.getText().toString();
-                    guesses.put(callsign, userGuess);
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_DONE) {
+                    if(donePlaying && !callsign.equals("")) {
+                        String userGuess = guessEditText.getText().toString();
+                        guesses.put(callsign, userGuess);
 
-                    if (userGuess.equalsIgnoreCase(callsign)) {
-                        Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
-                        scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                        if (userGuess.equalsIgnoreCase(callsign)) {
+                            Log.d("onkey: ", "onKey: " + Integer.parseInt(scoreNumTextView.getText().toString()));
+                            scoreNumTextView.setText(Integer.parseInt(scoreNumTextView.getText().toString()) + 1 + "");
+                        }
+                        guessEditText.setText("");
+                        callsign = CallSignLibrary.getRandomCallsign();
+                        String cw = MorseCreator.createMorse(callsign); //test
+                        Log.d("CW: ", "onClick: " + cw);
+                        donePlaying = false;
+                        replayCallSignButton.setEnabled(false);
+                        int length = MorseCreator.playSound(cw, speed * 1000, speed, frq,overallSpeed,gameSettings.getWPM(),gameSettings.getFarnsworth());
+
+                        enableReplayButton(length);
+                        RVAdapter adapter = new RVAdapter(guesses);
+                        recyclerView.setAdapter(adapter);
                     }
                     guessEditText.setText("");
                     callsign = CallSignLibrary.getRandomCallsign();
@@ -228,6 +231,7 @@ public class GameActivity extends AppCompatActivity {
 
                     RVAdapter adapter = new RVAdapter(guesses);
                     recyclerView.setAdapter(adapter);
+
                     return true;
                 }
                 return false;
@@ -270,27 +274,9 @@ public class GameActivity extends AppCompatActivity {
      *
      */
     private void sendScore(){
-        if(competitive) {
-            reference = FirebaseDatabase.getInstance().getReference().child(difficulty).child(gameSettings.getUsersCallSign());
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
-                    if (dataSnapshot.exists()) {
-                        highScore = Integer.parseInt(dataSnapshot.getValue().toString());
-                    }
-                    if (userScore >= highScore) {
-                        highScore = userScore;
-                        dataSnapshot.getRef().setValue(highScore);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
+            reference = FirebaseDatabase.getInstance().getReference().push().child(gameSettings.getUsersCallSign());
+            int userScore = Integer.parseInt(scoreNumTextView.getText().toString() )* (int) WPM;
+            reference.setValue(userScore);
     }
 
 }
