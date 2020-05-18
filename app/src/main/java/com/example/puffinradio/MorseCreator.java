@@ -33,6 +33,8 @@ public class MorseCreator {
     private static double tW;
     private static int s;//overall speed
 
+    static AudioTrack audioTrack;
+
     public static String createMorse(String callSign) {
         Log.d(TAG, "createMorse: HERE");
         String morse = "";
@@ -53,10 +55,11 @@ public class MorseCreator {
     public static int playSound(String morse, final double unitLength, double transSpeed, int freq, int overallSpeed, int wpm,boolean farnsWorth) {
 
         freqOfTone = freq;
-        if(transSpeed > 60)
-            transSpeed = 60;
-        if(transSpeed < 5) {
-            transSpeed = 5;
+        if(transSpeed > 40)
+            transSpeed = 40;
+        if(transSpeed <= 18) {
+            transSpeed = 18;
+            hasFarnsworth = true;
         }
         if(farnsWorth && (transSpeed <= 18)) {
             farnsWorth = true;
@@ -80,7 +83,6 @@ public class MorseCreator {
                 numUnits += 2;
             }
             if(hasFarnsworth) {
-
                 byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
                 indices += charSpace.length;
             } else {
@@ -165,7 +167,7 @@ public class MorseCreator {
     }
 
     static void playMorse(int sampleRate, byte[] generatedSnd, int length){
-        final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+        audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                 sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, generatedSnd.length,
                 AudioTrack.MODE_STATIC);
