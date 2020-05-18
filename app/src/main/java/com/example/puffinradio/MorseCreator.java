@@ -33,6 +33,8 @@ public class MorseCreator {
     private static double tW;
     private static int s;//overall speed
 
+    static AudioTrack audioTrack;
+
     public static String createMorse(String callSign) {
         Log.d(TAG, "createMorse: HERE");
         String morse = "";
@@ -159,7 +161,7 @@ public class MorseCreator {
     }
 
     static void playMorse(int sampleRate, byte[] generatedSnd, int length){
-        final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+        audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                 sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, generatedSnd.length,
                 AudioTrack.MODE_STATIC);

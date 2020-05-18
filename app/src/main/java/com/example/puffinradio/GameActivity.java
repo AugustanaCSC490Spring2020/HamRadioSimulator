@@ -124,6 +124,7 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         soundPool.autoPause();
         MorseCreator.handler.removeCallbacksAndMessages(null);
+        MorseCreator.audioTrack.release();
         if(countDownTimer != null) {
             countDownTimer.cancel();
         }
