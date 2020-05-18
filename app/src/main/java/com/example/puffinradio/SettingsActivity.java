@@ -84,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     String s = newValue.toString();
-                    if(Integer.parseInt(s) < 5 || Integer.parseInt(s) > 40) {
+                    if(Integer.parseInt(s) < 500 || Integer.parseInt(s) > 800) {
                         Toast toast = Toast.makeText(getContext(), "Frequency must be between 500-800 Hz", Toast.LENGTH_SHORT);
                         toast.show();
                         return false;
