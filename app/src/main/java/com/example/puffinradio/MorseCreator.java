@@ -71,7 +71,7 @@ public class MorseCreator {
         tA = findtA(overallSpeed, wpm);
         tC = 3*tA / 19;
         tW = 7*tA / 19;
-
+        byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
 
         int numUnits = 0;
         int indices = 1000;
@@ -84,7 +84,6 @@ public class MorseCreator {
                 numUnits += 2;
             }
             if(hasFarnsworth) {
-                byte[] charSpace  = new byte[(int) (2*tC*sampleRate)];
                 indices += charSpace.length;
             } else {
                 indices += generatedDit.length;
@@ -101,7 +100,11 @@ public class MorseCreator {
                 System.arraycopy(generatedDit, 0, morseSound, morseInd, generatedDit.length);
                 morseInd += generatedDit.length;
             } else {
-                morseInd += generatedDit.length;
+                if(!hasFarnsworth) {
+                    morseInd += generatedDit.length;
+                } else {
+                    morseInd +=charSpace.length;
+                }
             }
             morseInd += generatedDit.length;
         }
