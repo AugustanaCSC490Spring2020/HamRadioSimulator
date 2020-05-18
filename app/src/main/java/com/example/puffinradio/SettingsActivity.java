@@ -78,6 +78,21 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
             androidx.preference.EditTextPreference frqPref = getPreferenceManager().findPreference("frequency");
+            frqPref.setDialogMessage("Frequency must be between 500-800 Hz");
+
+            frqPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String s = newValue.toString();
+                    if(Integer.parseInt(s) < 5 || Integer.parseInt(s) > 40) {
+                        Toast toast = Toast.makeText(getContext(), "Frequency must be between 500-800 Hz", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
             frqPref.setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener(){
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
@@ -86,6 +101,21 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
             androidx.preference.EditTextPreference timePref = getPreferenceManager().findPreference("edit_text_preference_2");
+            timePref.setDialogMessage("Time must be between 1-15 minutes");
+
+            timePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String s = newValue.toString();
+                    if(Integer.parseInt(s) < 1 || Integer.parseInt(s) > 15) {
+                        Toast toast = Toast.makeText(getContext(), "Time must be between 1-15 minutes", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
             timePref.setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener(){
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
