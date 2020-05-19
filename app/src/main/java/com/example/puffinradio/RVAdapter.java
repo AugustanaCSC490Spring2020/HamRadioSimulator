@@ -42,8 +42,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
 
         String correct;
 
-        Log.d("createMorse", "guess: " + userGuess);
-        Log.d("createMorse", "callsign: " + callSign);
         if(userGuess.equalsIgnoreCase(callSign)) {
             correct = "Y";
             guessViewHolder.guess.setText(callSign);
@@ -54,8 +52,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
                 for(int j = 0; j < callSign.length(); j++){
                     if(callSign.charAt(j) != userGuess.charAt(j)){
                         ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
-                        Log.d("createMorse", "userChar: " + userGuess.charAt(j));
-                        Log.d("createMorse", "callsignChar: " + callSign.charAt(j));
                         ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
                 }
@@ -63,8 +59,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.GuessViewHolder>{
                 for(int j = 0; j < userGuess.length();j++){
                     if(callSign.charAt(j) != userGuess.charAt(j)){
                         ForegroundColorSpan redColor = new ForegroundColorSpan(Color.RED);
-                        Log.d("createMorse", "userChar: " + userGuess.charAt(j));
-                        Log.d("createMorse", "callsignChar: " + callSign.charAt(j));
                         ss.setSpan(redColor, j, j + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
                 }

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        CallSignLibrary.download(getFilesDir());
+        CallSignLibrary.download(getFilesDir(), getResources());
     }
 
 
