@@ -55,13 +55,28 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            androidx.preference.EditTextPreference callSignPref = getPreferenceManager().findPreference("signature");
+            callSignPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String s = newValue.toString();
+                    if(s.equals("") || s.length() > 10) {
+                        Toast toast = Toast.makeText(getContext(), "Call sign must be between 1 and 10 characters", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
             final androidx.preference.EditTextPreference CWpref = getPreferenceManager().findPreference("WPM");
             CWpref.setDialogMessage("Speed must be between 5-40 WPM");
             CWpref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     String s = newValue.toString();
-                    if(Integer.parseInt(s) < 5 || Integer.parseInt(s) > 40) {
+                    if(s.equals("") || Integer.parseInt(s) < 5 || Integer.parseInt(s) > 40) {
                         Toast toast = Toast.makeText(getContext(), "Speed must be between 5-40 WPM", Toast.LENGTH_SHORT);
                         toast.show();
                         return false;
@@ -84,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     String s = newValue.toString();
-                    if(Integer.parseInt(s) < 500 || Integer.parseInt(s) > 800) {
+                    if(s.equals("") || Integer.parseInt(s) < 500 || Integer.parseInt(s) > 800) {
                         Toast toast = Toast.makeText(getContext(), "Frequency must be between 500-800 Hz", Toast.LENGTH_SHORT);
                         toast.show();
                         return false;
@@ -107,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     String s = newValue.toString();
-                    if(Integer.parseInt(s) < 1 || Integer.parseInt(s) > 15) {
+                    if(s.equals("") || Integer.parseInt(s) < 1 || Integer.parseInt(s) > 15) {
                         Toast toast = Toast.makeText(getContext(), "Time must be between 1-15 minutes", Toast.LENGTH_SHORT);
                         toast.show();
                         return false;
