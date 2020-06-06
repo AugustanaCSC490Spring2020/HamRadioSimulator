@@ -32,7 +32,7 @@
             android:title="@string/static_title"
             app:useSimpleSummaryProvider="true"/>
         <EditTextPreference
-            android:defaultValue="200"
+            android:defaultValue="700"
             android:key="frequency"
             android:selectAllOnFocus="true"
             android:singleLine="true"
