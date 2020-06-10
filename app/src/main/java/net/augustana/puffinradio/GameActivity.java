@@ -199,7 +199,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_DONE) {
-                    if(donePlaying && !callsign.equals("")) {
+                    if(donePlaying && !guessEditText.getText().toString().equals("") && !callsign.equals("")) {
                         String userGuess = guessEditText.getText().toString();
                         guesses.put(callsign, userGuess);
 
