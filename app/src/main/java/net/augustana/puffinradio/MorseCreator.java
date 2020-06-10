@@ -1,4 +1,4 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

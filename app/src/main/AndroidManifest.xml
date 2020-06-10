@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.puffinradio" >
+    package="net.augustana.puffinradio" >
 
     <supports-screens
         android:largeScreens="true"
@@ -14,43 +14,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SettingsActivity"
+            android:name="net.augustana.puffinradio.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="net.augustana.puffinradio.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="net.augustana.puffinradio.MainActivity" />
         </activity>
         <activity android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-                  android:name=".GameActivity"
-            android:parentActivityName=".SettingsActivity"
+                  android:name="net.augustana.puffinradio.GameActivity"
+            android:parentActivityName="net.augustana.puffinradio.SettingsActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GameActivity" />
+                android:value="net.augustana.puffinradio.GameActivity" />
         </activity>
 
-        <activity android:name=".EndActivity"
+        <activity android:name="net.augustana.puffinradio.EndActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LeaderboardActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="net.augustana.puffinradio.LeaderboardActivity"
+            android:parentActivityName="net.augustana.puffinradio.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="net.augustana.puffinradio.MainActivity" />
         </activity>
         <activity
-            android:name=".AboutActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="net.augustana.puffinradio.AboutActivity"
+            android:parentActivityName="net.augustana.puffinradio.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="net.augustana.puffinradio.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name="net.augustana.puffinradio.MainActivity"
             android:screenOrientation="portrait" >
 
             <intent-filter>

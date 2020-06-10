@@ -1,12 +1,13 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import net.augustana.puffinradio.R;
 
 public class EndActivity extends AppCompatActivity {
     TextView scoreView;

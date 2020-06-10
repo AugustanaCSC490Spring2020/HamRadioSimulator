@@ -1,7 +1,4 @@
-package com.example.puffinradio;
-
-import java.util.Comparator;
-import java.util.Map;
+package net.augustana.puffinradio;
 
 public class HighScore implements Comparable<HighScore> {
     private String key;

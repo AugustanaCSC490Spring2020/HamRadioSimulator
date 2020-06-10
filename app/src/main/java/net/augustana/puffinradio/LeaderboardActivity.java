@@ -1,10 +1,12 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import net.augustana.puffinradio.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

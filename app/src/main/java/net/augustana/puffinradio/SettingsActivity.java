@@ -1,14 +1,14 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import net.augustana.puffinradio.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;

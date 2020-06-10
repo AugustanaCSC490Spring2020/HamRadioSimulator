@@ -1,8 +1,6 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import android.content.SharedPreferences;
-
-import androidx.preference.PreferenceManager;
 
 public class GameSettings {
     private SharedPreferences sharedPrefs;

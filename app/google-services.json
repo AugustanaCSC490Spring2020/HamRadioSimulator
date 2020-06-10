@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:511666474478:android:13da841e06ddf6f8dd52ff",
         "android_client_info": {
-          "package_name": "com.example.puffinradio"
+          "package_name": "net.augustana.puffinradio"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "511666474478-8utj6p5g19t7udhb1ljao32ljir5ef96.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.puffinradio",
+            "package_name": "net.augustana.puffinradio",
             "certificate_hash": "f28a6a35f9b65013c13afcd5aa7468924b922de2"
           }
         },

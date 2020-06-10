@@ -1,8 +1,10 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import net.augustana.puffinradio.R;
 
 public class AboutActivity extends AppCompatActivity {
 

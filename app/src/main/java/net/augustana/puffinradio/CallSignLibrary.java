@@ -1,4 +1,4 @@
-package com.example.puffinradio;
+package net.augustana.puffinradio;
 
 import android.content.res.Resources;
 import android.net.Uri;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import net.augustana.puffinradio.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
